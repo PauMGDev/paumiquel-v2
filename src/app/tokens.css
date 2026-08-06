@@ -9,14 +9,8 @@
   padding-block: var(--space-12) var(--space-24);
 }
 
-.head,
-.section {
+.head {
   padding-left: var(--margin-rule-offset);
-}
-
-.section {
-  padding-block: var(--space-12);
-  border-top: var(--rule-width) solid var(--color-rule);
 }
 
 .eyebrow,
@@ -70,19 +64,6 @@ figcaption {
 
 .meta dd {
   margin: 0;
-}
-
-.section-head {
-  margin-bottom: var(--space-4);
-  font-size: var(--text-xl);
-}
-
-.num {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--color-ink-soft);
-  vertical-align: 0.35em;
-  margin-right: var(--space-2);
 }
 
 .note {

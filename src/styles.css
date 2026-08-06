@@ -100,6 +100,40 @@ hr {
   background: var(--color-rule-strong);
 }
 
+/* Sección numerada: el filete de arriba es la retícula visible de la
+   dirección, y la numeración es del documento, no de cada componente. */
+.section {
+  padding: var(--space-12) 0 var(--space-12) var(--margin-rule-offset);
+  border-top: var(--rule-width) solid var(--color-rule);
+}
+
+.section-head {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-xl);
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+  vertical-align: 0.35em;
+  margin-right: var(--space-2);
+}
+
+/* Metadato en mono: empresa, periodo, emisor. Marginalia, no cuerpo.
+   El periodo va en su propia línea: partido a media frase por un salto de
+   línea automático deja de leerse como dato. */
+.meta-line {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-soft);
+}
+
+.meta-line span {
+  display: block;
+}
+
 /* Sello de disponibilidad: estado, no control. Nada que pulsar. */
 .stamp {
   justify-self: start;
