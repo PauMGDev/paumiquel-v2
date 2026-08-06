@@ -12,7 +12,7 @@ editando este archivo: lo impide `.claude/hooks/protect-roadmap.mjs`.
 
 - [x] 0.1 Template del playbook instanciado; piezas no justificadas borradas
       con su porqué en bitácora. Done: arnés mínimo commiteado.
-- [ ] 0.2 docs/DESIGN.md cerrado: referencias visuales elegidas y lista del
+- [x] 0.2 docs/DESIGN.md cerrado: referencias visuales elegidas y lista del
       bloque persona escrita por Pau. Done: cero PENDIENTE en el documento.
 
 ## F1 — Fundamentos
@@ -97,3 +97,31 @@ queda o la señal que hay que vigilar.
   stdin un payload que desmarca un paso cerrado y comprobando que sale con
   código 2. Señal a vigilar: si esa comprobación se olvida dos veces, el hook
   necesita su propio check ejecutable.
+
+### F0 — Decisiones de diseño
+
+- 2026-08-06 (0.2): el done "cero PENDIENTE" ya se cumplía al pie de la letra
+  y aun así el documento tenía seis decisiones abiertas: ninguna usaba esa
+  palabra. Un criterio que se satisface buscando una cadena de texto mide la
+  cadena, no el trabajo. Se reformula en la práctica a *nada abierto sin paso
+  dueño*: los colores candidatos, la línea de margen y la pareja tipográfica
+  siguen abiertos, pero ahora cada uno dice en el propio documento que lo
+  cierra 1.2. Regla que queda: diferir es legítimo, no nombrar al que hereda
+  la decisión no lo es. Señal a vigilar: un done que se pueda cerrar con un
+  grep exacto y nada más está mal escrito.
+
+- 2026-08-06 (0.2): idioma ES único; el inglés queda aplazado fuera de la v2,
+  sin ruta /en ni hreflang. El bilingüe desde el día 1 dobla rutas, OG y
+  revisión de copy en cada paso de F2 y F4, y no compra nada verificable hoy.
+  Lo que hace barato añadirlo después ya está comprado: el invariante de
+  CLAUDE.md de que todo el texto vive en un módulo único de copys. No se añade
+  andamiaje de i18n por si acaso. Regla que queda: aplazado es una decisión
+  escrita con su condición de reapertura, no un hueco. Señal a vigilar: si
+  aparece búsqueda de rol internacional, se reabre, y el trabajo entonces es
+  traducir el módulo de copys y prerenderizar una ruta, no refactorizar.
+
+- 2026-08-06 (0.2): MCP GRF fuera de la lista de proyectos. Quedan Sudoku
+  Trainer, MealPlanner y la tarjeta del playbook: tres piezas con narrativa
+  propia sostienen mejor el escrutinio de un evaluador que cuatro donde una
+  va de relleno. Regla que queda: en portfolio, la lista de proyectos se poda,
+  no se acumula.
