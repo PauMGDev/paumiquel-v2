@@ -31,24 +31,27 @@ técnica bien editada, no de una app.
 
 ### Traducción concreta
 
-- FONDO: papel, no pantalla. Blanco cálido roto (candidato: #FAF9F6), tinta
-  casi-negra cálida (#1C1B1A). La v2 es CLARA: es la ruptura visible con la
-  v1 y con el default oscuro de la época. Los valores exactos se cierran
-  en 1.2, medidos sobre la página de tokens.
+- FONDO: papel, no pantalla. CERRADO en 1.2: papel #FAF9F6, papel de ficha
+  #F2EFE7, tinta #1C1B1A (16.33:1 sobre papel), tinta secundaria #55514B
+  (7.48:1). La v2 es CLARA: es la ruptura visible con la v1 y con el default
+  oscuro de la época.
 - ESTRUCTURA VISIBLE: retícula que se nota. Filetes finos (1px, tinta al
   15-20%) separando secciones, márgenes generosos y consistentes, y una
   línea de margen vertical a la izquierda, como en un cuaderno de
-  laboratorio (opcional: se prueba y se decide en 1.2).
+  laboratorio. CERRADO en 1.2: la línea de margen ENTRA (--color-rule-strong,
+  #C3BDB1), recorre la hoja entera y no cada bloque.
 - LENGUAJE DE ANOTACIÓN: secciones numeradas (01, 02...), imágenes con pie
   ("Fig. 03 — Arquitectura del clasificador"), metadatos (fechas, stack,
   estado) en mono pequeña como marginalia. El espíritu de la bitácora,
   hecho estética.
-- ACENTO: UNA tinta de anotación, azul tinta (candidato: #1D4ED8; el valor
-  final se ajusta sobre el papel y se mide en 1.2) para enlaces y acción.
-  Segundo acento ultraescaso, rojo lápiz: 2-3 subrayados en toda la web como
-  máximo. Se prueba en 1.2; si no gana nada, no entra.
-- DISPONIBILIDAD: como sello o casilla de formulario, no como badge de app
-  ("[x] abierto a oportunidades" en mono, o un sello de tinta girado 2°).
+- ACENTO: UNA tinta de anotación, azul tinta, para enlaces y acción. CERRADO
+  en 1.2: #1D4ED8 (6.37:1 sobre papel), con #16389B para hover y foco
+  (9.62:1). El rojo lápiz NO ENTRA: se probó en la página de tokens y no
+  compraba nada que el azul y la jerarquía no dieran ya, y cada color extra
+  es una decisión más en cada componente. El sistema tiene un solo acento.
+- DISPONIBILIDAD: sello de tinta girado 2°, no badge de app. CERRADO en 1.2
+  frente a la casilla "[x] abierto a oportunidades": el sello es gesto, y el
+  hero es el único sitio donde se usa. Color --color-seal #2F6B4F (5.98:1).
 - PERSONA: "Apéndice A — Fuera del código", con formato de apéndice real.
   El chiste estructural ES el tono.
 - Iconos: si algún componente los necesita, la librería aprobada es
@@ -56,13 +59,15 @@ técnica bien editada, no de una app.
   tamaños del sistema tipográfico). Proponer la instalación cuando el primer
   componente la pida, no antes.
 
-### Tipografía (2 familias; la pareja se cierra en 1.2)
+### Tipografía (2 familias; CERRADA en 1.2)
 
-Recomendación: Fraunces (variable, optical sizing: display con carácter en
-títulos, legible en cuerpo) + IBM Plex Mono (marginalia, etiquetas, figuras:
-herencia ingeniera literal). Alternativas que se prueban en la página de
-tokens de 1.2: Newsreader + Space Mono; Source Serif 4 + IBM Plex Mono.
-Regla: subset + variable + font-display swap; presupuesto 2 archivos.
+Fraunces variable (optical sizing: display con carácter en títulos, legible
+en cuerpo) + IBM Plex Mono 400 (marginalia, etiquetas, figuras: herencia
+ingeniera literal). Se eligió sobre la página de tokens frente a Newsreader +
+Space Mono y Source Serif 4 + IBM Plex Mono, con el mismo texto y los mismos
+tamaños en los tres. Fraunces pesa 66kB frente a los 129kB de Newsreader y
+los 119kB de Source Serif 4: gana en carácter y en presupuesto a la vez.
+Self-hosted, subset latin, font-display swap: 2 archivos, 77kB en total.
 
 ### Lo que esta dirección PROHÍBE
 

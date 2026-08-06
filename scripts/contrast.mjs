@@ -20,7 +20,6 @@ const PAIRS = [
   ['color-ink-soft', 'color-paper-deep', AA_TEXT, 'metadatos sobre ficha'],
   ['color-accent', 'color-paper', AA_TEXT, 'enlaces'],
   ['color-accent-strong', 'color-paper', AA_TEXT, 'enlaces en hover y foco'],
-  ['color-pencil', 'color-paper', AA_TEXT, 'rojo lápiz'],
   ['color-seal', 'color-paper', AA_TEXT, 'sello de disponibilidad'],
 ];
 

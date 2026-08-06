@@ -42,10 +42,6 @@
   /* Azul tinta pisado: hover y foco. */
   --color-accent-strong: #16389b; /* sobre papel: 9.62:1 — AAA */
 
-  /* Rojo lápiz: subrayado de corrección. Ultraescaso — 2 o 3 usos en toda
-     la web, según docs/DESIGN.md. */
-  --color-pencil: #a32e22; /* sobre papel: 6.71:1 — AA */
-
   /* Verde sello: el indicador de disponibilidad. */
   --color-seal: #2f6b4f; /* sobre papel: 5.98:1 — AA */
 

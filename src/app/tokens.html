@@ -32,15 +32,13 @@
   <section class="section">
     <h2 class="section-head"><span class="num">{{ copy.type.number }}</span> {{ copy.type.title }}</h2>
     <p class="note">{{ copy.type.note }}</p>
-    @for (c of copy.type.candidates; track c.id) {
-      <article class="specimen" [attr.data-display]="c.display" [attr.data-mono]="c.mono">
-        <p class="specimen-label">{{ c.id }} — {{ c.label }}</p>
-        <p class="spec-display">{{ copy.type.display }}</p>
-        <p class="spec-subhead">{{ copy.type.subhead }}</p>
-        <p class="spec-running">{{ copy.type.running }}</p>
-        <p class="spec-mono">{{ copy.type.monoLine }}</p>
-      </article>
-    }
+    <article class="specimen">
+      <p class="specimen-label">{{ copy.type.label }}</p>
+      <p class="spec-display">{{ copy.type.display }}</p>
+      <p class="spec-subhead">{{ copy.type.subhead }}</p>
+      <p class="spec-running">{{ copy.type.running }}</p>
+      <p class="spec-mono">{{ copy.type.monoLine }}</p>
+    </article>
   </section>
 
   <section class="section">
@@ -56,27 +54,14 @@
       <figcaption>{{ copy.figure.caption }}</figcaption>
     </figure>
     <p class="sidenote">{{ copy.figure.sidenote }}</p>
-    <p class="pencil">{{ copy.figure.pencil }}</p>
   </section>
 
   <section class="section">
     <h2 class="section-head"><span class="num">{{ copy.seal.number }}</span> {{ copy.seal.title }}</h2>
     <p class="note">{{ copy.seal.note }}</p>
-    <div class="seals">
-      <p class="seal-checkbox">[x] {{ copy.seal.checkbox }}</p>
-      <p class="seal-stamp">
-        {{ copy.seal.stamp }}
-        <span class="seal-stamp-meta">{{ copy.seal.stampMeta }}</span>
-      </p>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 class="section-head"><span class="num">{{ copy.marginRule.number }}</span> {{ copy.marginRule.title }}</h2>
-    <p class="note">{{ copy.marginRule.note }}</p>
-    <p class="rule-sample">{{ copy.marginRule.withRule }}</p>
-    <div class="no-rule">
-      <p class="rule-sample">{{ copy.marginRule.withoutRule }}</p>
-    </div>
+    <p class="seal-stamp">
+      {{ copy.seal.stamp }}
+      <span class="seal-stamp-meta">{{ copy.seal.stampMeta }}</span>
+    </p>
   </section>
 </div>

@@ -43,12 +43,16 @@ figcaption {
   font-family: var(--font-mono);
 }
 
-.eyebrow {
-  margin: 0 0 var(--space-2);
+.eyebrow,
+.specimen-label {
   color: var(--color-ink-soft);
   font-size: var(--text-xs);
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
+}
+
+.eyebrow {
+  margin: 0 0 var(--space-2);
 }
 
 .title {
@@ -131,20 +135,19 @@ figcaption {
   font-size: var(--text-sm);
 }
 
+.chip-token,
+.chip-hex,
 .chip-ratio {
   font-size: var(--text-2xs);
   color: var(--color-ink-soft);
+}
+
+.chip-hex,
+.chip-ratio {
   text-align: right;
 }
 
-.chip-token,
 .chip-hex {
-  font-size: var(--text-2xs);
-  color: var(--color-ink-soft);
-}
-
-.chip-hex {
-  text-align: right;
   text-transform: uppercase;
 }
 
@@ -157,10 +160,6 @@ figcaption {
 
 .specimen-label {
   margin: 0 0 var(--space-4);
-  font-size: var(--text-xs);
-  letter-spacing: var(--tracking-label);
-  color: var(--color-ink-soft);
-  text-transform: uppercase;
 }
 
 .spec-display {
@@ -179,40 +178,10 @@ figcaption {
   color: var(--color-ink-soft);
 }
 
-.spec-running {
-  font-size: var(--text-base);
-}
-
 .spec-mono {
   margin: 0;
   font-size: var(--text-sm);
   color: var(--color-ink-soft);
-}
-
-[data-display='fraunces'] .spec-display,
-[data-display='fraunces'] .spec-subhead,
-[data-display='fraunces'] .spec-running {
-  font-family: 'Fraunces', serif;
-}
-
-[data-display='newsreader'] .spec-display,
-[data-display='newsreader'] .spec-subhead,
-[data-display='newsreader'] .spec-running {
-  font-family: 'Newsreader', serif;
-}
-
-[data-display='source'] .spec-display,
-[data-display='source'] .spec-subhead,
-[data-display='source'] .spec-running {
-  font-family: 'Source Serif 4', serif;
-}
-
-[data-mono='plex'] .spec-mono {
-  font-family: 'IBM Plex Mono', monospace;
-}
-
-[data-mono='space'] .spec-mono {
-  font-family: 'Space Mono', monospace;
 }
 
 /* --- 03 Figura --- */
@@ -262,29 +231,11 @@ figcaption {
   color: var(--color-ink-soft);
 }
 
-.pencil {
-  max-width: var(--measure);
-  text-decoration: underline var(--color-pencil) 2px;
-  text-underline-offset: 0.22em;
-}
-
 /* --- 04 Sello --- */
 
-.seals {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-8);
-}
-
-.seal-checkbox {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--color-seal);
-}
-
 .seal-stamp {
+  /* Ítem de grid: sin esto se estira a toda la columna y deja de ser sello. */
+  justify-self: start;
   margin: 0;
   padding: var(--space-2) var(--space-4);
   border: 2px solid var(--color-seal);
@@ -302,23 +253,6 @@ figcaption {
   font-size: var(--text-2xs);
   letter-spacing: 0;
   text-transform: none;
-}
-
-/* --- 05 Línea de margen --- */
-
-.rule-sample {
-  max-width: var(--measure);
-  margin: 0;
-}
-
-/* Tapa la línea de margen en su tramo: el bloque se ve como se vería la
-   página entera sin ella. */
-.no-rule {
-  position: relative;
-  margin-left: calc(-1 * var(--margin-rule-offset));
-  margin-top: var(--space-6);
-  padding: var(--space-6) var(--space-6) var(--space-6) var(--margin-rule-offset);
-  background: var(--color-paper);
 }
 
 @media (min-width: 40rem) {
