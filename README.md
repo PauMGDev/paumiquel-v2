@@ -1,15 +1,23 @@
-# Template
+# paumiquel.com v2
 
-Copy `CLAUDE.md`, `ROADMAP.md` and `.claude/` into the root of a new project.
-Replace every `<placeholder>` with the real module, command and notation names,
-then delete the `<!-- why -->` comments once the block has earned its place.
+Portfolio profesional de Pau Miquel. Angular con SSG: cada ruta se sirve como
+HTML completo.
 
-`.claude/settings.json` registers the roadmap hook. It matches `Edit|Write|MultiEdit`
-because those are the three tools that can rewrite a file, and it runs
-`node .claude/hooks/protect-roadmap.mjs` by relative path, so the hook travels
-with the repository instead of with the machine. It lives in a hook and not in
-CLAUDE.md because an instruction is a request and this rule had already been
-broken twice.
+## Documentos
 
-Then delete everything this project's friction has not yet justified. That
-deletion is the method.
+- `CLAUDE.md` — invariantes de arquitectura y convenciones del repo.
+- `docs/DESIGN.md` — dirección visual y decisiones de producto. Manda sobre
+  cualquier preferencia estética.
+- `ROADMAP.md` — plan por fases y bitácora de decisiones. Las casillas
+  marcadas no se reabren editando el archivo: lo impide
+  `.claude/hooks/protect-roadmap.mjs`.
+
+## Desarrollo
+
+```
+pnpm dev     # local
+pnpm build   # producción con prerender
+```
+
+El repo es el primer uso del template de agentic-harness-playbook y lo
+demuestra en público.
