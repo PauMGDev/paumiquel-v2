@@ -5,9 +5,12 @@ y esperar OK, ejecutar, resumen de cambios, verificar el done, entrada de
 bitácora si el paso tomó una decisión o encontró una fricción, commit.
 Pasos pequeños, commits por intención. No avanzar de fase con un done en rojo.
 
+Las casillas marcadas son el registro del trabajo cerrado. No se reabren
+editando este archivo: lo impide `.claude/hooks/protect-roadmap.mjs`.
+
 ## F0 — Arnés y decisiones
 
-- [ ] 0.1 Template del playbook instanciado; piezas no justificadas borradas
+- [x] 0.1 Template del playbook instanciado; piezas no justificadas borradas
       con su porqué en bitácora. Done: arnés mínimo commiteado.
 - [ ] 0.2 docs/DESIGN.md cerrado: referencias visuales elegidas y lista del
       bloque persona escrita por Pau. Done: cero PENDIENTE en el documento.
@@ -65,3 +68,32 @@ y qué salió mal. Se escribe en el momento, no a posteriori.
 
 Formato de cada entrada: qué pasó, por qué se resolvió así, y la regla que
 queda o la señal que hay que vigilar.
+
+### F0 — Arnés
+
+- 2026-08-06 (0.1): borrados los dos subagentes del template, `backend-dev` y
+  `ui-dev`. El repo es de un solo módulo: la frontera que ambos existían para
+  vigilar (UI no toca el núcleo) no tiene núcleo que vigilar, y el resto de sus
+  reglas —DESIGN.md manda, strings solo en el módulo de copys, contraste
+  medido— ya vive en CLAUDE.md. Un agente que solo repite CLAUDE.md gasta
+  tokens sin comprar nada. Regla que queda: un subagente entra cuando la
+  fricción lo pide, no de fábrica; su descripción tiene que ser suficiente para
+  decidir la delegación sin abrir el archivo. Señal a vigilar: si el trabajo
+  visual empieza a saltarse docs/DESIGN.md, `ui-dev` vuelve, esta vez con el
+  módulo real escrito en lugar de un placeholder.
+
+- 2026-08-06 (0.1): DESIGN.md movido de `.claude/docs/` a `docs/`. CLAUDE.md
+  declara que docs/DESIGN.md manda sobre la estética del agente, y esa ruta no
+  existía: la regla apuntaba al vacío. Se mueve el archivo, no la regla, porque
+  el documento es de producto y lo leen personas, no solo el arnés. Regla que
+  queda: toda ruta citada en CLAUDE.md se verifica con `test -f`; una
+  instrucción que apunta a un archivo inexistente es peor que no tenerla.
+
+- 2026-08-06 (0.1): el arnés se queda en tres piezas —el hook del roadmap con
+  su settings.json y el comando `next-step`—. Se conservan porque las tres se
+  ejecutan; lo demás eran plantillas con placeholders sin resolver, incluido el
+  README del template, sustituido por el del proyecto. Fricción anotada: el
+  arnés no tiene test propio, así que el hook se verifica a mano metiéndole por
+  stdin un payload que desmarca un paso cerrado y comprobando que sale con
+  código 2. Señal a vigilar: si esa comprobación se olvida dos veces, el hook
+  necesita su propio check ejecutable.
