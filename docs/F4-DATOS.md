@@ -18,15 +18,24 @@ Un campo vacío no es ninguna de las tres: bloquea el paso.
 
 ---
 
-## 0. Confidencialidad (esto primero: decide todo lo demás)
+## 0. Confidencialidad — RESPONDIDO 2026-08-06
 
-- ¿Hay NDA, contrato o política de empresa que revisar antes de publicar?
-- ¿El nombre de Robles Sphère puede ir asociado al detalle del sistema?
-  (Como empleador ya está en la home; esto es otra cosa.)
-- ¿Alguien de la empresa tiene que aprobarlo? ¿Quién, y hace falta?
-- ¿Los nombres reales de las categorías se pueden publicar?
-- ¿Volúmenes exactos, o solo orden de magnitud?
-- ¿Alguna captura, aunque sea con datos inventados?
+- **NDA o política que revisar: SÍ, existe.** Pau responde a la vez que no hace
+  falta aprobación de nadie de la empresa, así que la revisión del documento la
+  hace él y la decisión de publicar es suya. Queda escrito aquí porque es la
+  única condición del case study que no se puede verificar desde el repo.
+- **Nombrar a Robles Sphère junto al detalle del sistema: SÍ.**
+  (PENDIENTE de confirmar: la pregunta era de dos ramas y la respuesta fue
+  "sí"; se toma como "sí, la empresa puede nombrarse". Si era la otra rama, el
+  case study se escribe sin nombrar al empleador y cambia desde la primera
+  frase.)
+- **Aprobación de la empresa: no hace falta.**
+- **Nombres reales de las categorías: publicables.**
+- **Volúmenes: solo orden de magnitud.** Nada de cifras exactas: "cientos al
+  día", no "412 al día". Aplica también a los resultados del bloque 4.
+- **Capturas: permitidas, pero hoy no hay ninguna.** La página se diseña para
+  sostenerse sin captura; si llega una después, entra como figura numerada y
+  no obliga a rehacer la maqueta.
 
 ## 1. Problema
 
