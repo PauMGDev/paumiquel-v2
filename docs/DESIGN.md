@@ -34,7 +34,7 @@ técnica bien editada, no de una app.
 - FONDO: papel, no pantalla. CERRADO en 1.2: papel #FAF9F6, papel de ficha
   #F2EFE7, tinta #1C1B1A (16.33:1 sobre papel), tinta secundaria #55514B
   (7.48:1). La v2 es CLARA: es la ruptura visible con la v1 y con el default
-  oscuro de la época.
+  oscuro de la época. AMPLIADO en F3: el papel lleva grano (ver Artefactos).
 - ESTRUCTURA VISIBLE: retícula que se nota. Filetes finos (1px, tinta al
   15-20%) separando secciones, márgenes generosos y consistentes, y una
   línea de margen vertical a la izquierda, como en un cuaderno de
@@ -49,6 +49,9 @@ técnica bien editada, no de una app.
   (9.62:1). El rojo lápiz NO ENTRA: se probó en la página de tokens y no
   compraba nada que el azul y la jerarquía no dieran ya, y cada color extra
   es una decisión más en cada componente. El sistema tiene un solo acento.
+  NOTA F3: el subrayado a mano (ver Artefactos) usa las tintas existentes;
+  el gesto aporta la calidez, no hace falta color nuevo. La decisión del
+  rojo sigue cerrada.
 - DISPONIBILIDAD: sello de tinta girado 2°, no badge de app. CERRADO en 1.2
   frente a la casilla "[x] abierto a oportunidades": el sello es gesto, y el
   hero es el único sitio donde se usa. Color --color-seal #2F6B4F (5.98:1).
@@ -69,13 +72,63 @@ tamaños en los tres. Fraunces pesa 66kB frente a los 129kB de Newsreader y
 los 119kB de Source Serif 4: gana en carácter y en presupuesto a la vez.
 Self-hosted, subset latin, font-display swap: 2 archivos, 77kB en total.
 
+### Composición y ritmo (CERRADO en F3)
+
+Diagnóstico de la revisión F3: la primera ejecución fue correcta pero
+inerte — la letra de la dirección sin el espíritu de la enmienda de
+temperatura. Reglas que quedan:
+
+- DENSIDAD: un cuaderno está lleno. El hero es UNA composición maquetada
+  (kicker, nombre, subtítulo, statement subrayado, bio, metadatos, enlaces
+  y sello, visibles juntos en el primer viewport de desktop), no elementos
+  apilados con huecos. Ninguna sección tiene más aire que contenido; el
+  ritmo vertical se comprime respecto a la primera ejecución (~40-50%).
+- CARRIL IZQUIERDO: el índice no come más de ~220px, o justifica su ancho
+  con la línea de margen como motivo. Una de las dos, documentada.
+- JERARQUÍA DE LECTURA: los bullets de listas (Experiencia) van un escalón
+  por debajo de la prosa en cuerpo; los metadatos de la derecha se asocian
+  a su título sin esfuerzo (distancia y presencia suficientes). Test de los
+  3 segundos: título, lista y metadato distinguibles de un vistazo.
+
+### Artefactos de cuaderno (CERRADO en F3 — exactamente tres, nada más)
+
+La calidez se construye con tres artefactos y disciplina de cupo. Añadir un
+cuarto requiere reabrir esta sección con argumento.
+
+1. SUBRAYADO A MANO: trazo ligeramente irregular (SVG, no border recto),
+   en 2-3 sitios en toda la web. El primero: el statement del hero. Usa
+   tinta o azul existentes (ver NOTA F3 en Acento: sin color nuevo).
+2. GRANO DE PAPEL: textura sutilísima en el fondo (noise, opacidad muy
+   baja). Debe notarse solo si se busca; no puede bajar ningún contraste
+   por debajo de AA (se mide).
+3. FICHAS CON CUERPO: las fichas del Apéndice A llevan rotación alterna
+   sutil (±0,5-0,8°), etiqueta A.x como pestaña (no como línea dentro de
+   la caja) y filete definido. Fichas de índice sobre una mesa, no inputs
+   deshabilitados.
+
+El sello DISPONIBLE es el patrón de referencia de esta capa: gesto único,
+con oficio, en su sitio. Los artefactos lo acompañan; no compiten con él.
+
+### Figuras (CERRADO en F3)
+
+- Estilo: trazo de cuaderno — bordes finos ligeramente irregulares o línea
+  a mano alzada contenida. Nada de cajas de diagrama de flujo corporativo.
+- Toda figura lleva caption "Fig. NN — ..." y vive dentro del flujo de
+  lectura (referencia: pudding.cool).
+- Inventario mínimo de la home: Fig. 01 flujo de aplicación (restyle),
+  Fig. 02 línea temporal de trayectoria en Experiencia. Deseable: mini
+  diagrama por tarjeta de proyecto. El case study (F4) añadirá las suyas.
+- Legibles en 375px o con alternativa apilada.
+
 ### Lo que esta dirección PROHÍBE
 
 Fondos oscuros. Cyan y neones. Gradientes. Glassmorphism y blur decorativo.
 Glow. Tarjetas con sombra flotante genérica. Bordes redondeados grandes
 (máximo 2-4px: el papel no tiene border-radius). Emojis en la UI. Animaciones
 de entrada aparatosas (permitido: transiciones discretas de 150ms o menos).
-Cualquier elemento que parezca de dashboard SaaS.
+Cualquier elemento que parezca de dashboard SaaS. Y desde F3: vacíos de
+página que dejen una sección flotando (el aire sin contenido es tan ajeno
+al cuaderno como la sombra flotante).
 
 ### Referencias
 
@@ -99,15 +152,17 @@ obedece los rasgos, no las webs.
   marginalia y sidenotes, no estética.
 
 DESCARTADO ciechanow.ski: densidad académica sin calidez. El cuaderno es de
-ingeniero, pero bonito: estructura con encanto, no paper seco.
+ingeniero, pero bonito: estructura con encanto, no paper seco. (La primera
+ejecución de F2 cayó exactamente en esto; las secciones de Composición y
+Artefactos existen para impedir la recaída.)
 
 ### Enmienda de dirección (tras las referencias)
 
 - El Apéndice A se maqueta como bento de fichas de cuaderno, no como lista
   plana: cada ítem es una ficha con su etiqueta (A.1, A.2...) en mono.
 - Temperatura general: cuaderno cálido y hojeable, no apunte de laboratorio.
-- Requisito derivado para el 2.1 (añadir a su done en el ROADMAP): primer
-  viewport autocontenido, verificado en 375px y desktop.
+- Requisito derivado para el 2.1 (en su done del ROADMAP): primer viewport
+  autocontenido, verificado en 375px y desktop.
 
 ## Contenido
 
