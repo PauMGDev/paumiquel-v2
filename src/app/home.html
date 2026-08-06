@@ -99,4 +99,14 @@
     </ul>
   </section>
 
+  <section class="section" id="contacto">
+    <h2 class="section-head"><span class="num">{{ contact.number }}</span> {{ contact.title }}</h2>
+    <p class="section-lead">{{ contact.lead }}</p>
+    <p class="contact-mail"><a [href]="'mailto:' + contact.email">{{ contact.email }}</a></p>
+    <ul class="links">
+      @for (link of contact.links; track link.href) {
+        <li><a [href]="link.href" rel="me noopener" target="_blank">{{ link.label }}</a></li>
+      }
+    </ul>
+  </section>
 </main>

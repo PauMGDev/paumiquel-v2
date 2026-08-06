@@ -168,6 +168,16 @@ export const copy = {
       ],
     },
 
+    contact: {
+      number: '07',
+      title: 'Contacto',
+      lead: 'Abierto a nuevas oportunidades y colaboraciones. El correo es la vía más rápida.',
+      email: 'paumgdev@gmail.com',
+      links: [
+        { label: 'GitHub', href: 'https://github.com/PauMGDev' },
+        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/paumiquelguinot/' },
+      ],
+    },
 
     seo: {
       title: 'Pau Miquel — Full stack TypeScript con IA aplicada',

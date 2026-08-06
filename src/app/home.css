@@ -151,6 +151,12 @@
   font-size: var(--text-base);
 }
 
+.contact-mail {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+}
+
 .card-links {
   display: flex;
   gap: var(--space-6);

@@ -16,6 +16,7 @@ export class Home {
   protected readonly certification = copy.home.certification;
   protected readonly projects = copy.home.projects;
   protected readonly appendix = copy.home.appendix;
+  protected readonly contact = copy.home.contact;
 
   constructor() {
     applySeo({
