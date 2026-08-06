@@ -26,7 +26,7 @@ editando este archivo: lo impide `.claude/hooks/protect-roadmap.mjs`.
       "Fig. 01" de ejemplo, el sello de disponibilidad).
       Done: página revisada y aprobada por Pau ANTES de construir
       componentes encima.
-- [ ] 1.3 Fontanería SEO: title y description por ruta, OG completo con
+- [x] 1.3 Fontanería SEO: title y description por ruta, OG completo con
       imagen, canonical, sitemap, robots, JSON-LD. Done: verificación sobre
       el HTML de build, no sobre el navegador.
 
@@ -218,3 +218,53 @@ queda o la señal que hay que vigilar.
   que queda: un presupuesto que molesta durante un trabajo temporal se
   aguanta, no se sube; subirlo es perder el aviso para siempre a cambio de
   un rato de comodidad.
+
+### F1 — SEO
+
+- 2026-08-06 (1.3): canonical y og:url apuntan a https://paumiquel.com desde
+  ya, aunque la v2 viva en vercel.app hasta 5.3 y ese dominio sirva todavía
+  la v1. Escribir las URLs en su forma definitiva hace que el cutover no
+  mueva ninguna, y de paso evita que la vercel.app se indexe como duplicado.
+  Se midió el riesgo que preocupaba: Lighthouse no penaliza el canonical
+  cruzado, el SEO sube igualmente de 82 a 100. Regla que queda: las URLs
+  públicas se escriben una vez, en el dominio final; el hosting provisional
+  no se cuela en el contenido. Señal a vigilar: en 5.3, lo único que debería
+  hacer falta tocar es el dominio de Vercel, no el código.
+
+- 2026-08-06 (1.3): el sitemap se genera desde
+  dist/.../prerendered-routes.json, que el build ya escribe, y descarta las
+  rutas cuyo HTML lleva noindex. La alternativa era una lista escrita a mano:
+  con dos rutas parece lo mismo, pero se queda vieja el día que entre el case
+  study de 4.1 y nadie se entera hasta que falta en Google. El script lee
+  además SITE_URL de src/app/seo.ts en vez de repetir el dominio, para que
+  app y sitemap no puedan discrepar en silencio. Regla que queda: una lista
+  que el build ya conoce no se reescribe a mano. Señal a vigilar: si el
+  postbuild dice "0 descartadas" cuando /tokens sigue existiendo, el filtro
+  de noindex se rompió.
+
+- 2026-08-06 (1.3): robots.txt NO bloquea /tokens, aunque la página no deba
+  indexarse. Un Disallow impide rastrearla, y sin rastreo nadie lee su
+  noindex: el resultado es justo el contrario del que se busca. Se deja el
+  rastreo abierto y la exclusión la hace la etiqueta. Regla que queda:
+  noindex y Disallow no se combinan sobre la misma URL; se elige uno, y para
+  sacar algo del índice el que funciona es noindex.
+
+- 2026-08-06 (1.3): la imagen OG se renderiza a mano desde
+  scripts/og/home.html con Chromium headless y el PNG se commitea; no hay
+  generación en build. Una imagen que cambia una vez al año no justifica un
+  paso de pipeline ni una dependencia. El precio es que la plantilla repite
+  los valores de src/tokens.css y puede quedarse vieja, así que lo dice en su
+  propia cabecera. Señal a vigilar: si en algún paso hay que regenerarla dos
+  veces seguidas, deja de ser barata a mano.
+
+- 2026-08-06 (1.3): fricción de arnés, y esta es mía. Un `cd` a dist/ en un
+  comando anterior dejó el shell dentro del build, y desde allí salió un
+  commit con las dos intenciones juntas, un proyecto de Vercel llamado
+  "browser" creado por desplegar la carpeta equivocada, y un force-push para
+  volver a separar los commits. El proyecto sobrante está borrado y la
+  historia rehecha, pero el fallo de base es haber confiado en el directorio
+  de trabajo entre comandos. Regla que queda: los comandos que despliegan o
+  commitean llevan ruta absoluta o `cd` explícito al raíz; el cwd no es
+  estado fiable entre pasos. Señal a vigilar: cualquier `vercel deploy` cuya
+  URL no empiece por el nombre del proyecto es un despliegue desde el sitio
+  equivocado.
