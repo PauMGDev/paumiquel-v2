@@ -151,6 +151,23 @@ hr {
     width: min(13.75rem, calc(50vw - var(--page-max) / 2 - var(--space-6)));
     padding-right: var(--space-6);
     z-index: 1;
+    transition:
+      opacity var(--transition),
+      translate var(--transition),
+      visibility var(--transition);
+  }
+
+  /* El índice se retira mientras el hero está delante: una portada no lleva
+     índice. Lo pone el JS, nunca el HTML servido, así que sin JS el índice
+     se ve siempre.
+
+     visibility y no solo opacity: un nav invisible pero tabulable es una
+     trampa de teclado. La visibilidad no interpola, salta al final de la
+     transición, así que primero se desvanece y luego desaparece. */
+  .index.is-away {
+    opacity: 0;
+    visibility: hidden;
+    translate: -0.5rem -50%;
   }
 
   .index ol {

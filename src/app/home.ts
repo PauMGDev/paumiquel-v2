@@ -39,6 +39,12 @@ export class Home {
    *  de llegar a stack es peor que no marcar nada. */
   protected readonly active = signal('');
 
+  /** Con el hero en pantalla el índice sobra: la portada no necesita índice.
+   *  Arranca en false a propósito — el HTML prerenderizado sale con el índice
+   *  visible y es el JS el que lo esconde mientras el hero está delante. Sin
+   *  JS se ve siempre, que es el fallo correcto. */
+  protected readonly heroInView = signal(false);
+
   private readonly taglineIndex = signal(0);
   protected readonly tagline = computed(() => this.hero.taglines[this.taglineIndex()]);
 
@@ -66,6 +72,7 @@ export class Home {
     // que pasar, y el HTML ya sale completo y con los enlaces funcionando.
     afterNextRender(() => {
       this.trackSections();
+      this.watchHero();
       this.rotateTagline();
     });
   }
@@ -84,6 +91,21 @@ export class Home {
       { rootMargin: '-10% 0px -70% 0px' },
     );
     sections.forEach((section: HTMLElement) => observer.observe(section));
+  }
+
+  /** Observador propio y sin márgenes: el de las secciones mira una banda
+   *  estrecha de la pantalla para decidir cuál está activa, y aquí la
+   *  pregunta es otra —si queda algo del hero a la vista—, así que el
+   *  umbral es el viewport entero. */
+  private watchHero(): void {
+    const hero = this.host.nativeElement.querySelector<HTMLElement>('.hero');
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      this.heroInView.set(entry.isIntersecting);
+    });
+    observer.observe(hero);
+    this.destroyRef.onDestroy(() => observer.disconnect());
   }
 
   private rotateTagline(): void {

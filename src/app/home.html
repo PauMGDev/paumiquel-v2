@@ -1,4 +1,4 @@
-<nav class="index" [attr.aria-label]="index.label">
+<nav class="index" [class.is-away]="heroInView()" [attr.aria-label]="index.label">
   <ol>
     @for (item of index.items; track item.id) {
       <li>
