@@ -20,7 +20,7 @@ editando este archivo: lo impide `.claude/hooks/protect-roadmap.mjs`.
 - [x] 1.1 Scaffold Angular + SSG + pipeline de deploy con preview URL desde
       el día 1. Done: ruta dummy sirviendo HTML completo en el build,
       Lighthouse base medido y anotado.
-- [ ] 1.2 Sistema de diseño: tokens y tipografía de la dirección elegida,
+- [x] 1.2 Sistema de diseño: tokens y tipografía de la dirección elegida,
       documentados con sus porqués y ratios de contraste. Página de muestra
       de tokens (papel, tinta, familias en tres tamaños, un filete, una
       "Fig. 01" de ejemplo, el sello de disponibilidad).
@@ -171,3 +171,50 @@ queda o la señal que hay que vigilar.
   cero contenido es el punto de partida, no un logro. Señal a vigilar: si el
   rendimiento cae por debajo de 95, el paso que lo tiró es el que lo arregla,
   no la auditoría final de 5.2.
+
+- 2026-08-06 (1.2): las tres parejas tipográficas candidatas se cargaron a la
+  vez en /tokens con el mismo texto y los mismos tamaños, en lugar de elegir
+  de memoria. Gana Fraunces + IBM Plex Mono, y el argumento que decidió no fue
+  estético: Fraunces pesa 66kB frente a los 129kB de Newsreader y los 119kB de
+  Source Serif 4, así que gana carácter y presupuesto a la vez. Los dos
+  perdedores se borraron en el mismo commit que cerró la decisión. Regla que
+  queda: comparar cuesta un paso y se hace una vez; elegir de memoria cuesta
+  un rediseño. Señal a vigilar: si vuelve a haber más de dos `@font-face` en
+  src/styles.css, hay una comparación sin cerrar.
+
+- 2026-08-06 (1.2): el rojo lápiz se descarta y el sistema se queda con un
+  solo acento. Estaba puesto en la página, subrayando una frase, y al verlo
+  no compraba nada que el azul tinta y la jerarquía no dieran ya; a cambio
+  añadía una decisión de color a cada componente futuro. Regla que queda: un
+  token candidato se prueba puesto y se borra si no gana; "por si acaso" no
+  es un uso. Señal a vigilar: si en F2 aparece la tentación de un color para
+  destacar algo, el problema es de jerarquía, no de paleta.
+
+- 2026-08-06 (1.2): el criterio de contraste de CLAUDE.md pedía el ratio en
+  el comentario del token, y eso caduca en cuanto alguien toca un hex. Se
+  añade scripts/contrast.mjs, que lee src/tokens.css y falla por debajo de
+  AA: 7 parejas medidas, todas en AA o mejor. Los filetes quedan fuera de la
+  lista a propósito y con el porqué escrito al lado — WCAG 1.4.11 pide 3:1 a
+  lo que significa algo, y una retícula de cuaderno a 3:1 deja de ser
+  retícula y pasa a ser marco. Regla que queda: toda pareja color-fondo nueva
+  entra en PAIRS en el mismo commit que la crea. Señal a vigilar: un
+  comentario de ratio que no coincida con la salida del script.
+
+- 2026-08-06 (1.2): fricción con la especificidad al montar la columna de
+  marginalia. `.section > *` (clase + hijo) pesa más que `.note`, así que las
+  notas se quedaron en la columna de contenido pese a tener `grid-column: 2`.
+  Las excepciones hubo que escribirlas también como selector de hijo. Regla
+  que queda: si una regla base usa `> *`, sus excepciones se escriben al
+  mismo nivel de selector o no ganan. Segundo tropiezo del mismo tipo: el
+  sello, al pasar a ser ítem de grid, se estiró a toda la columna hasta
+  ponerle `justify-self: start`. Señal a vigilar: un estilo que "no se
+  aplica" casi nunca es un typo; es una regla más específica ganando.
+
+- 2026-08-06 (1.2): el presupuesto de 4kB por CSS de componente saltó
+  mientras la página cargaba los tres candidatos. Se dejó el aviso en rojo
+  durante la comparación en lugar de subir el presupuesto, y al borrar los
+  perdedores volvió a verde sola. De paso cayó una regla que no hacía nada
+  (`.spec-running` repetía el tamaño de cuerpo que ya venía del body). Regla
+  que queda: un presupuesto que molesta durante un trabajo temporal se
+  aguanta, no se sube; subirlo es perder el aviso para siempre a cambio de
+  un rato de comodidad.
