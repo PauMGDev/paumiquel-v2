@@ -65,4 +65,23 @@
       </p>
     </article>
   </section>
+
+  <section class="section" id="proyectos">
+    <h2 class="section-head"><span class="num">{{ projects.number }}</span> {{ projects.title }}</h2>
+    <ul class="cards">
+      @for (project of projects.items; track project.name) {
+        <li class="card">
+          <h3 class="card-title">{{ project.name }}</h3>
+          <p class="meta-line">{{ project.stack }}</p>
+          <p class="card-summary">{{ project.summary }}</p>
+          <p class="card-note">{{ project.note }}</p>
+          <ul class="card-links">
+            @for (link of project.links; track link.href) {
+              <li><a [href]="link.href" rel="noopener" target="_blank">{{ link.label }}</a></li>
+            }
+          </ul>
+        </li>
+      }
+    </ul>
+  </section>
 </main>

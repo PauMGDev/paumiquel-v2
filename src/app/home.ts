@@ -14,6 +14,7 @@ export class Home {
   protected readonly experience = copy.home.experience;
   protected readonly education = copy.home.education;
   protected readonly certification = copy.home.certification;
+  protected readonly projects = copy.home.projects;
 
   constructor() {
     applySeo({

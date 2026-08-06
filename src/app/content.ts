@@ -87,6 +87,46 @@ export const copy = {
       ],
     },
 
+    projects: {
+      number: '05',
+      title: 'Proyectos',
+      items: [
+        {
+          name: 'Sudoku Trainer',
+          stack: 'TypeScript · Next.js · Prisma · PostgreSQL · Claude API',
+          summary:
+            'Un sudoku que detecta qué técnica desbloquea tu siguiente movimiento y te la explica. El engine es TypeScript puro, sin dependencias de plataforma: encuentra la técnica y verifica el argumento en servidor. El modelo solo redacta, y nunca ve el tablero.',
+          note: 'Caché por patrón y tope de gasto diario: una demo pública no puede comerse la factura.',
+          links: [
+            { label: 'Demo', href: 'https://sudoku-trainer-mu.vercel.app' },
+            { label: 'Código', href: 'https://github.com/PauMGDev/SudokuTrainer' },
+          ],
+        },
+        {
+          name: 'MealPlanner',
+          stack: 'Angular · NestJS · Prisma · PostgreSQL · Tailwind',
+          summary:
+            'Planificación semanal de comidas: recetas, control de despensa con caducidades y calendario de menús según lo que hay en casa.',
+          note: 'Desarrollado con workflow agéntico: contexto por capas y subagentes especializados en API, datos e interfaz.',
+          links: [
+            { label: 'Demo', href: 'https://meal-planner-azure-ten.vercel.app' },
+            { label: 'Código', href: 'https://github.com/PauMGDev/MealPlanner' },
+          ],
+        },
+        {
+          name: 'agentic-harness-playbook',
+          stack: 'Método · Claude Code · Plantilla copiable',
+          summary:
+            'Notas de campo sobre cómo hacer que un agente sea fiable para construir software de verdad, con la plantilla de arnés que uso: invariantes escritos, pasos pequeños y un criterio de terminado que se mide.',
+          note: 'Esta web es su primera aplicación en público. El repositorio es abierto: el ROADMAP lleva la bitácora de cada decisión y cada fricción, con fecha.',
+          links: [
+            { label: 'Playbook', href: 'https://github.com/PauMGDev/agentic-harness-playbook' },
+            { label: 'Esta web', href: 'https://github.com/PauMGDev/paumiquel-v2' },
+          ],
+        },
+      ],
+    },
+
     certification: {
       number: '04',
       title: 'Certificación',

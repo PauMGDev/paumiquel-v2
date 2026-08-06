@@ -105,6 +105,55 @@
   color: var(--color-ink-soft);
 }
 
+/* --- Fichas de proyecto ---------------------------------------------------
+   Ficha de cuaderno: papel, filete de 1px, etiqueta en mono. Sin sombra ni
+   elevación — el papel no flota. */
+
+/* Las fichas se quedan en la columna de lectura: una caja que llega más lejos
+   que el texto que contiene rompe la retícula de la página. */
+.cards {
+  display: grid;
+  gap: var(--space-6);
+  max-width: var(--measure);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  padding: var(--space-6);
+  border: var(--rule-width) solid var(--color-rule);
+  border-radius: var(--radius);
+  background: var(--color-paper-deep);
+}
+
+.card-title {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-1);
+}
+
+.card-summary {
+  margin: var(--space-4) 0 0;
+}
+
+.card-note {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  color: var(--color-ink-soft);
+}
+
+.card-links {
+  display: flex;
+  gap: var(--space-6);
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
 @media (min-width: 64rem) {
   /* El sello sube al margen derecho, que es donde vive la anotación. */
   .hero {
