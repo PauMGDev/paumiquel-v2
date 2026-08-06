@@ -1,0 +1,367 @@
+:host {
+  display: block;
+  padding-inline: var(--page-gutter);
+}
+
+.sheet {
+  position: relative;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-block: var(--space-12) var(--space-24);
+}
+
+/* Línea de margen del cuaderno: recorre la hoja entera, no cada bloque. */
+.sheet::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: var(--rule-width);
+  background: var(--color-rule-strong);
+}
+
+.head,
+.section {
+  padding-left: var(--margin-rule-offset);
+}
+
+.section {
+  padding-block: var(--space-12);
+  border-top: var(--rule-width) solid var(--color-rule);
+}
+
+.eyebrow,
+.specimen-label,
+.chip-token,
+.chip-hex,
+.chip-ratio,
+.chip-use,
+.meta,
+.note,
+.sidenote,
+figcaption {
+  font-family: var(--font-mono);
+}
+
+.eyebrow {
+  margin: 0 0 var(--space-2);
+  color: var(--color-ink-soft);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: var(--text-3xl);
+}
+
+.lead {
+  margin-block: var(--space-4) var(--space-8);
+  font-size: var(--text-lg);
+}
+
+.meta {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--color-ink-soft);
+}
+
+.meta-row {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.meta dt::after {
+  content: ':';
+}
+
+.meta dd {
+  margin: 0;
+}
+
+.section-head {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-xl);
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+  vertical-align: 0.35em;
+  margin-right: var(--space-2);
+}
+
+.note {
+  max-width: var(--measure);
+  margin-bottom: var(--space-8);
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  color: var(--color-ink-soft);
+}
+
+/* --- 01 Paleta --- */
+
+.swatches {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.swatch {
+  display: grid;
+  grid-template-columns: var(--space-8) 1fr auto;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: var(--rule-width) solid var(--color-rule);
+}
+
+.chip {
+  grid-row: span 2;
+  height: var(--space-8);
+  border: var(--rule-width) solid var(--color-rule-strong);
+  border-radius: var(--radius);
+}
+
+.chip-use {
+  font-size: var(--text-sm);
+}
+
+.chip-ratio {
+  font-size: var(--text-2xs);
+  color: var(--color-ink-soft);
+  text-align: right;
+}
+
+.chip-token,
+.chip-hex {
+  font-size: var(--text-2xs);
+  color: var(--color-ink-soft);
+}
+
+.chip-hex {
+  text-align: right;
+  text-transform: uppercase;
+}
+
+/* --- 02 Tipografía --- */
+
+.specimen {
+  padding-block: var(--space-8);
+  border-top: var(--rule-width) solid var(--color-rule);
+}
+
+.specimen-label {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  color: var(--color-ink-soft);
+  text-transform: uppercase;
+}
+
+.spec-display {
+  margin: 0;
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+.spec-subhead {
+  margin: var(--space-1) 0 var(--space-4);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-body);
+  line-height: var(--leading-snug);
+  color: var(--color-ink-soft);
+}
+
+.spec-running {
+  font-size: var(--text-base);
+}
+
+.spec-mono {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+[data-display='fraunces'] .spec-display,
+[data-display='fraunces'] .spec-subhead,
+[data-display='fraunces'] .spec-running {
+  font-family: 'Fraunces', serif;
+}
+
+[data-display='newsreader'] .spec-display,
+[data-display='newsreader'] .spec-subhead,
+[data-display='newsreader'] .spec-running {
+  font-family: 'Newsreader', serif;
+}
+
+[data-display='source'] .spec-display,
+[data-display='source'] .spec-subhead,
+[data-display='source'] .spec-running {
+  font-family: 'Source Serif 4', serif;
+}
+
+[data-mono='plex'] .spec-mono {
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+[data-mono='space'] .spec-mono {
+  font-family: 'Space Mono', monospace;
+}
+
+/* --- 03 Figura --- */
+
+.figure {
+  margin: 0 0 var(--space-8);
+  max-width: var(--measure);
+}
+
+.figure-body {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: var(--color-paper-deep);
+  border-radius: var(--radius);
+}
+
+.figure-body p {
+  margin: 0;
+  line-height: 1;
+}
+
+.scale-3xl {
+  font-size: var(--text-3xl);
+}
+.scale-2xl {
+  font-size: var(--text-2xl);
+}
+.scale-xl {
+  font-size: var(--text-xl);
+}
+.scale-base {
+  font-size: var(--text-base);
+}
+
+figcaption {
+  margin-top: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--color-ink-soft);
+}
+
+.sidenote {
+  max-width: var(--measure);
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  color: var(--color-ink-soft);
+}
+
+.pencil {
+  max-width: var(--measure);
+  text-decoration: underline var(--color-pencil) 2px;
+  text-underline-offset: 0.22em;
+}
+
+/* --- 04 Sello --- */
+
+.seals {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.seal-checkbox {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-seal);
+}
+
+.seal-stamp {
+  margin: 0;
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid var(--color-seal);
+  border-radius: var(--radius);
+  color: var(--color-seal);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  rotate: -2deg;
+}
+
+.seal-stamp-meta {
+  display: block;
+  font-size: var(--text-2xs);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* --- 05 Línea de margen --- */
+
+.rule-sample {
+  max-width: var(--measure);
+  margin: 0;
+}
+
+/* Tapa la línea de margen en su tramo: el bloque se ve como se vería la
+   página entera sin ella. */
+.no-rule {
+  position: relative;
+  margin-left: calc(-1 * var(--margin-rule-offset));
+  margin-top: var(--space-6);
+  padding: var(--space-6) var(--space-6) var(--space-6) var(--margin-rule-offset);
+  background: var(--color-paper);
+}
+
+@media (min-width: 40rem) {
+  .swatches {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4) var(--space-8);
+  }
+}
+
+/* A partir de aquí cabe la columna de margen: las notas dejan de ir debajo
+   del título y pasan al margen derecho, que es donde vive la marginalia de
+   un cuaderno (referencia tufte-css en docs/DESIGN.md). */
+@media (min-width: 64rem) {
+  .head,
+  .section {
+    display: grid;
+    grid-template-columns: minmax(0, var(--measure)) minmax(0, 18rem);
+    column-gap: var(--space-12);
+    align-items: start;
+  }
+
+  /* El selector de hijo tiene más peso que el de clase: las excepciones de
+     abajo se escriben también como hijo o no ganan. */
+  .head > *,
+  .section > * {
+    grid-column: 1;
+  }
+
+  .head > .meta,
+  .section > .note {
+    grid-column: 2;
+    grid-row: 1;
+    margin-bottom: 0;
+  }
+
+  /* La nota al margen se alinea con la figura que comenta, no con el título. */
+  .section > .sidenote {
+    grid-column: 2;
+    grid-row: 3;
+    margin-bottom: 0;
+  }
+
+  .section > .swatches {
+    grid-column: 1 / -1;
+  }
+}
