@@ -32,7 +32,7 @@ editando este archivo: lo impide `.claude/hooks/protect-roadmap.mjs`.
 
 ## F2 — Home
 
-- [ ] 2.1 Hero con la jerarquía actual + indicador de disponibilidad.
+- [x] 2.1 Hero con la jerarquía actual + indicador de disponibilidad.
       Done añadido: primer viewport autocontenido — nada de texto o elementos
       cortados al entrar, en ningún breakpoint (ver enmienda en docs/DESIGN.md).
 - [ ] 2.2 Stack, experiencia, formación y certificación (migración de
@@ -268,3 +268,38 @@ queda o la señal que hay que vigilar.
   estado fiable entre pasos. Señal a vigilar: cualquier `vercel deploy` cuya
   URL no empiece por el nombre del proyecto es un despliegue desde el sitio
   equivocado.
+
+### F2 — Home
+
+- 2026-08-06 (2.1): DESIGN.md pedía migración literal del hero de la v1 y el
+  done de este paso pedía primer viewport autocontenido. No caben juntos: los
+  tres párrafos de la v1 ocupan unos 900px de alto a 375px de ancho, contra
+  los 667 útiles de un iPhone SE, y entrar viendo el párrafo del stack partido
+  por la mitad es justo lo que la enmienda de dirección prohíbe. Se resolvió
+  a favor del done, sin perder una palabra: el hero conserva la jerarquía
+  (eyebrow, nombre, rol, entradilla, disponibilidad, enlaces) y los párrafos
+  de stack e IA bajan a las secciones de 2.2, que es donde tienen mejor sitio.
+  El "abierto a oportunidades" deja de ser el final de un párrafo y pasa a ser
+  el sello, que es lo que la dirección pedía desde el principio: estado, no
+  párrafo. Regla que queda: cuando la migración literal choca con un criterio
+  medible, gana el criterio y el contenido cambia de sección, no de existencia.
+
+- 2026-08-06 (2.1): "nada cortado al entrar" se comprobó midiendo, no
+  mirando: un script recorre 375x667, 390x844, 768x1024 y 1440x900, y falla si
+  la caja del hero pasa del alto del viewport o si algo desborda a lo ancho.
+  Resultado: 571 de 667, 641 de 844, 778 de 1024 y 684 de 900, sin scroll
+  horizontal. El `min-height: 76svh` del hero es deliberado: hace crecer, no
+  recorta, así que no puede cortar nada. Fricción anotada: ese script vive de
+  momento fuera del repo porque necesita un navegador y el proyecto no tiene
+  esa dependencia. Señal a vigilar: 2.2, 2.3 y 2.4 tienen el mismo criterio;
+  a la segunda vez que haga falta, entra al repo con playwright como
+  devDependency en lugar de repetirse a mano.
+
+- 2026-08-06 (2.1): el sello y la hoja con su línea de margen pasaron a
+  src/styles.css. La guía de /tokens ya tenía su propia copia del sello y el
+  hero necesitaba el mismo: dos copias de la misma marca se separan sola, y
+  entonces la guía deja de enseñar lo que el sitio de verdad renderiza. Regla
+  que queda: en cuanto una marca del sistema tiene dos consumidores, deja de
+  vivir en un componente. Medido de paso al poner `<main>` y un `<h1>` único:
+  accesibilidad de 94 a 100, con las cuatro categorías de Lighthouse en 100 y
+  LCP de 1,1s.
