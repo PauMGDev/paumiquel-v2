@@ -36,6 +36,9 @@ agentic-harness-playbook y lo demuestra en público.
   por intención, en inglés, imperativo, título de 72 caracteres o menos.
   Cuerpo solo cuando el porqué no es obvio del diff.
 - Imágenes: dimensionadas, lazy salvo above-the-fold, formatos modernos.
+- Todo trabajo visual (tokens, componentes, layout) empieza aplicando la
+  skill frontend-design, con docs/DESIGN.md como autoridad por encima de
+  cualquier criterio de la skill.
 
 ## Cierre de tarea
 
