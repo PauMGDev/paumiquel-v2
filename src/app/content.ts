@@ -29,6 +29,10 @@ export const copy = {
       ],
       availability: { state: 'disponible', detail: 'agosto 2026' },
 
+      // Señal de scroll al pie del hero. Es un enlace de verdad a la primera
+      // sección, no un adorno: si algo indica que hay más abajo, que lleve.
+      cue: { label: '↓ 01 — Stack', href: '#stack' },
+
       // Frases propuestas por el agente para que Pau las edite o las cambie
       // enteras. Rotan bajo el rol; con prefers-reduced-motion se queda la
       // primera y no se mueve nada.

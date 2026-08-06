@@ -69,6 +69,12 @@
   --text-2xl: clamp(1.75rem, 1.4rem + 1.7vw, 2.5rem);
   --text-3xl: clamp(2.25rem, 1.6rem + 3.2vw, 3.75rem);
 
+  /* Portada. Solo el nombre del hero, y solo porque el hero ocupa el primer
+     viewport entero: a 60px la composición se llenaba de aire, y un cuaderno
+     se llena con tinta, no con márgenes. En móvil coincide con --text-3xl,
+     que ahí el ancho manda. */
+  --text-4xl: clamp(2.25rem, 1.1rem + 4.9vw, 5.25rem);
+
   --leading-tight: 1.1;
   --leading-snug: 1.3;
   --leading-body: 1.6;

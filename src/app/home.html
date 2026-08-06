@@ -20,8 +20,9 @@
       <h1 class="name">{{ hero.name }}</h1>
       <p class="role">{{ hero.role }}</p>
       <p class="tagline" aria-live="off"><span class="underline">{{ tagline() }}</span></p>
-      <p class="lead">{{ hero.lead }}</p>
     </div>
+
+    <p class="lead">{{ hero.lead }}</p>
 
     <dl class="facts">
       @for (fact of hero.facts; track fact.label) {
@@ -42,6 +43,8 @@
       {{ hero.availability.state }}
       <span>{{ hero.availability.detail }}</span>
     </p>
+
+    <a class="cue" [href]="hero.cue.href">{{ hero.cue.label }}</a>
   </section>
 
   <section class="section" id="stack">

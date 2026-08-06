@@ -3,16 +3,23 @@
   padding-inline: var(--page-gutter);
 }
 
-/* El hero es UNA composición, no tres bloques repartidos en la altura de la
-   pantalla (docs/DESIGN.md, Composición y ritmo). Estirarlo a 92svh con
-   space-between dejaba dos cinturones de aire muerto de ~200px: aire sin
-   contenido, que es lo que la dirección prohíbe desde F3. Aquí el hero mide
-   lo que mide su contenido y la sección 01 asoma por debajo — un cuaderno
-   está lleno. */
+/* El hero ocupa exactamente el primer viewport (docs/DESIGN.md, Composición
+   y ritmo) y sus piezas se reparten dentro con intención: identidad arriba,
+   bio en el centro óptico, enlaces y sello anclando abajo. La diferencia con
+   la primera ejecución no es la altura, es qué la llena: allí eran dos
+   cinturones de aire entre tres bloques apilados; aquí las dos columnas
+   trabajan a la vez y ninguna franja queda sin nada a los lados.
+
+   min-height y no height: en un viewport bajo el contenido manda y el hero
+   crece antes que recortarse. Y dvh y no vh: en móvil la barra del navegador
+   entra y sale, y 100vh mide la pantalla sin barra, o sea más de lo que se
+   ve. Autocontenido gana a exacto. */
 .hero {
   display: grid;
   gap: var(--space-6);
-  padding: var(--space-8) 0 var(--space-12) var(--margin-rule-offset);
+  min-height: 100dvh;
+  align-content: space-between;
+  padding: var(--space-8) 0 var(--space-8) var(--margin-rule-offset);
 }
 
 .hero-main {
@@ -20,8 +27,20 @@
   gap: var(--space-2);
 }
 
-.hero-main .lead {
-  margin-top: var(--space-2);
+/* Señal de scroll en marginalia: dice qué viene, no que hay que bajar, y
+   lleva allí. Un enlace, no un adorno; sin nada que bote. */
+.cue {
+  justify-self: start;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  color: var(--color-ink-soft);
+  text-decoration: none;
+}
+
+.cue:hover,
+.cue:focus-visible {
+  color: var(--color-ink);
 }
 
 .eyebrow {
@@ -34,7 +53,7 @@
 }
 
 .name {
-  font-size: var(--text-3xl);
+  font-size: var(--text-4xl);
 }
 
 .role {
@@ -453,19 +472,23 @@
 }
 
 @media (min-width: 64rem) {
-  /* Dos columnas: la prosa a la izquierda, la ficha de datos y el sello
-     pegados uno debajo del otro en el margen derecho, y los enlaces
-     cerrando por abajo. El sello va bajo la ficha y no al pie: repartir
-     las dos piezas del margen entre arriba y abajo abría un hueco de 280px
-     entre ellas, que es el vacío de página que la dirección prohíbe.
-     El orden del DOM no lo tocan las áreas, así que en móvil la pila sigue
-     siendo la de docs/DESIGN.md: bio, metadatos, enlaces y sello. */
+  /* Tres bandas y dos columnas. La fila del medio es la que estira (1fr) y
+     la bio se centra en ella: el aire que sobra en un viewport alto se lo
+     queda el centro, no los bordes, y la identidad, los enlaces y el sello
+     siguen anclados donde tocan. La ficha de datos acompaña a la identidad
+     arriba y el sello cierra abajo con los enlaces, así que ninguna de las
+     dos columnas se queda vacía en su banda.
+
+     El orden del DOM no lo tocan las áreas: en móvil la pila sigue siendo la
+     de docs/DESIGN.md — identidad, bio, metadatos, enlaces y sello. */
   .hero {
     grid-template-columns: minmax(0, var(--measure)) minmax(0, 18rem);
     grid-template-areas:
-      'main facts'
-      'main stamp'
-      'links links';
+      'main  facts'
+      'lead  lead'
+      'links stamp'
+      'cue   cue';
+    grid-template-rows: auto 1fr auto auto;
     column-gap: var(--space-12);
     row-gap: var(--space-6);
     align-items: start;
@@ -479,16 +502,33 @@
     grid-area: main;
   }
 
+  /* La bio cruza las dos columnas y sube un escalón de cuerpo: en la banda
+     central es el único bloque, así que o la llena o la banda queda vacía.
+     Sigue dentro del óptimo editorial de línea (~62 caracteres). */
+  .hero > .lead {
+    grid-area: lead;
+    align-self: center;
+    max-width: none;
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+
   .hero > .facts {
     grid-area: facts;
   }
 
   .hero > .links {
     grid-area: links;
+    align-self: end;
   }
 
   .hero > .stamp {
     grid-area: stamp;
+    align-self: end;
+  }
+
+  .hero > .cue {
+    grid-area: cue;
   }
 
   .lead {

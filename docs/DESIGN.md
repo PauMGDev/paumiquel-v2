@@ -83,6 +83,19 @@ temperatura. Reglas que quedan:
   y sello, visibles juntos en el primer viewport de desktop), no elementos
   apilados con huecos. Ninguna sección tiene más aire que contenido; el
   ritmo vertical se comprime respecto a la primera ejecución (~40-50%).
+- PRIMER VIEWPORT: el hero ocupa exactamente el primer viewport
+  (min-height 100dvh, composición distribuida). Nada de secciones asomando
+  cortadas por debajo del fold. min-height y no height: si el contenido no
+  cabe, el hero crece — autocontenido manda sobre exacto. dvh y no vh: en
+  móvil la barra del navegador entra y sale, y vh mide la pantalla sin
+  barra, o sea más de lo que se ve.
+  La altura se llena DISTRIBUYENDO la composición (identidad arriba, bio en
+  el centro óptico, enlaces y sello anclando abajo) y, si hace falta, subiendo
+  el cuerpo de la tipografía de portada; nunca añadiendo padding hasta
+  empujar. La pantalla completa solo se gana si está llena.
+  Al pie del hero va una señal de scroll en marginalia mono ("↓ 01 — Stack"),
+  enlace real a la primera sección. Estática o con transición de 150ms o
+  menos: nada que bote.
 - CARRIL IZQUIERDO: el índice no come más de ~220px, o justifica su ancho
   con la línea de margen como motivo. Una de las dos, documentada.
 - JERARQUÍA DE LECTURA: los bullets de listas (Experiencia) van un escalón
