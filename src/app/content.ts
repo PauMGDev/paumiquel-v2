@@ -28,6 +28,26 @@ export const copy = {
         { label: 'LinkedIn', href: 'https://www.linkedin.com/in/paumiquelguinot/' },
       ],
       availability: { state: 'disponible', detail: 'agosto 2026' },
+
+      // Frases propuestas por el agente para que Pau las edite o las cambie
+      // enteras. Rotan bajo el rol; con prefers-reduced-motion se queda la
+      // primera y no se mueve nada.
+      taglines: [
+        'La IA no arregla una arquitectura mala.',
+        'Escribo el test antes de que me lo pidan.',
+        'Prefiero borrar código a escribirlo.',
+        'Desmonto cosas para entender cómo están hechas.',
+      ],
+
+      // Ficha de datos. Solo lo que se puede defender hoy: ubicación e
+      // idiomas entran cuando Pau pase los valores.
+      facts: [
+        // El estado no entra aquí: ya lo dice el sello, y repetirlo a dos
+        // dedos de distancia resta a los dos.
+        { label: 'Enfoque', value: 'Full stack con IA aplicada' },
+        { label: 'Fondo', value: 'Videojuegos → desarrollo web' },
+        { label: 'Busco', value: 'Equipo donde la base y la IA cuenten' },
+      ],
     },
     stack: {
       number: '01',
@@ -39,6 +59,11 @@ export const copy = {
         { label: 'IA aplicada', items: ['Claude API', 'MCP', 'Claude Code'] },
         { label: 'Calidad', items: ['Vitest', 'TDD', 'Strict mode'] },
       ],
+      figure: {
+        caption: 'Fig. 01 — Flujo de una aplicación. La capa de IA cuelga del backend, nunca del navegador: el modelo recibe lo que el servidor decide, y nada más.',
+        nodes: ['Navegador', 'Angular', 'NestJS', 'PostgreSQL'],
+        aside: 'Claude API',
+      },
       secondary: {
         label: 'También he trabajado con',
         items: ['C#', 'ASP.NET', 'Blazor', 'SQL Server', 'Unity', 'MongoDB', 'Express', 'Next.js'],
@@ -162,30 +187,31 @@ export const copy = {
     appendix: {
       number: '05',
       title: 'Apéndice A — Fuera del código',
-      note: 'Cinco líneas para que la conversación no empiece por el currículum.',
+      note: 'Cuatro líneas para que la conversación no empiece por el currículum.',
+      // Textos provisionales: son los que Pau escribió en docs/DESIGN.md,
+      // menos el de Sudoku, que repetía el proyecto. Pau los reescribe.
       items: [
         {
           tag: 'A.1',
-          title: 'Sudoku',
-          text: 'Jugador de toda la vida; acabé construyendo el entrenador que me habría gustado tener.',
-        },
-        {
-          tag: 'A.2',
+          icon: 'cpu',
           title: 'Electrónica de sobremesa',
           text: 'Desmonto aparatos para entender cómo están hechos. Volver a montarlos es opcional.',
         },
         {
-          tag: 'A.3',
+          tag: 'A.2',
+          icon: 'spade',
           title: 'TCGs',
           text: 'Juegos de cartas coleccionables: lectura de patrones y probabilidad disfrazadas de afición.',
         },
         {
-          tag: 'A.4',
+          tag: 'A.3',
+          icon: 'guitar',
           title: 'Guitarra',
           text: 'La práctica deliberada, aplicada a algo que no compila.',
         },
         {
-          tag: 'A.5',
+          tag: 'A.4',
+          icon: 'mountain',
           title: 'Moto y montaña',
           text: 'Donde no llega la cobertura.',
         },
@@ -197,6 +223,7 @@ export const copy = {
       title: 'Contacto',
       lead: 'Abierto a nuevas oportunidades y colaboraciones. El correo es la vía más rápida.',
       email: 'paumgdev@gmail.com',
+      emailNote: 'Respondo en el día.',
       links: [
         { label: 'GitHub', href: 'https://github.com/PauMGDev' },
         { label: 'LinkedIn', href: 'https://www.linkedin.com/in/paumiquelguinot/' },

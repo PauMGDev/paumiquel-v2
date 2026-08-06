@@ -120,24 +120,33 @@ hr {
 
   .index ol {
     display: grid;
-    gap: var(--space-2);
+    gap: var(--space-3);
     margin: 0;
     padding: 0;
     list-style: none;
     font-family: var(--font-mono);
-    font-size: var(--text-2xs);
+    font-size: var(--text-xs);
   }
 
+  /* Rótulo siempre visible: en gris claro y a 10px no se leía, y un índice
+     que hay que adivinar no orienta a nadie. */
   .index a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
     color: var(--color-ink-soft);
     text-decoration: none;
     transition: color var(--transition);
   }
 
-  .index a span {
-    /* El número siempre; el rótulo, cuando esa sección es la que se lee. */
-    opacity: 0;
-    transition: opacity var(--transition);
+  .index a::before {
+    content: '';
+    width: var(--space-4);
+    height: var(--rule-width);
+    background: var(--color-rule-strong);
+    transition:
+      width var(--transition),
+      background var(--transition);
   }
 
   .index a:hover,
@@ -146,10 +155,9 @@ hr {
     color: var(--color-ink);
   }
 
-  .index a:hover span,
-  .index a:focus-visible span,
-  .index .is-active span {
-    opacity: 1;
+  .index .is-active::before {
+    width: var(--space-8);
+    background: var(--color-ink);
   }
 }
 
@@ -185,6 +193,15 @@ hr {
 
 .meta-line span {
   display: block;
+}
+
+/* Micro-interacción única: el filete se oscurece. Nada se mueve ni flota. */
+.card {
+  transition: border-color var(--transition);
+}
+
+.card:hover {
+  border-color: var(--color-rule-strong);
 }
 
 /* Sello de disponibilidad: estado, no control. Nada que pulsar. */

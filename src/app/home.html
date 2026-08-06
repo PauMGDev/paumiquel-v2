@@ -19,9 +19,21 @@
       <p class="eyebrow">{{ hero.eyebrow }}</p>
       <h1 class="name">{{ hero.name }}</h1>
       <p class="role">{{ hero.role }}</p>
+      <p class="tagline" aria-live="off">{{ tagline() }}</p>
     </div>
 
-    <p class="lead">{{ hero.lead }}</p>
+    <div class="hero-body">
+      <p class="lead">{{ hero.lead }}</p>
+
+      <dl class="facts">
+        @for (fact of hero.facts; track fact.label) {
+          <div class="fact">
+            <dt class="meta-line">{{ fact.label }}</dt>
+            <dd>{{ fact.value }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
 
     <div class="hero-foot">
       <ul class="links">
@@ -47,6 +59,29 @@
       <dt class="meta-line">{{ stack.secondary.label }}</dt>
       <dd class="secondary">{{ stack.secondary.items.join(' · ') }}</dd>
     </dl>
+
+    <figure class="flow">
+      <svg viewBox="0 0 720 190" role="img" [attr.aria-label]="stack.figure.caption">
+        @for (node of stack.figure.nodes; track node; let i = $index) {
+          <g [attr.transform]="'translate(' + i * 180 + ' 0)'">
+            <rect x="4" y="18" width="150" height="52" rx="2" />
+            <text x="79" y="49">{{ node }}</text>
+          </g>
+          @if (i < stack.figure.nodes.length - 1) {
+            <path [attr.d]="'M' + (i * 180 + 156) + ' 44 h20'" marker-end="url(#tip)" />
+          }
+        }
+        <path d="M439 70 v46 h-80 v18" stroke-dasharray="4 4" marker-end="url(#tip)" />
+        <rect x="284" y="134" width="150" height="46" rx="2" />
+        <text x="359" y="161">{{ stack.figure.aside }}</text>
+        <defs>
+          <marker id="tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L8 4 L0 8 z" />
+          </marker>
+        </defs>
+      </svg>
+      <figcaption>{{ stack.figure.caption }}</figcaption>
+    </figure>
   </section>
 
   <section class="section" id="experiencia">
@@ -106,7 +141,17 @@
     <ul class="cards bento">
       @for (item of appendix.items; track item.tag) {
         <li class="card">
-          <p class="meta-line">{{ item.tag }}</p>
+          <p class="meta-line card-tag">
+            <span class="card-icon">
+              @switch (item.icon) {
+                @case ('cpu') { <svg lucideCpu></svg> }
+                @case ('spade') { <svg lucideSpade></svg> }
+                @case ('guitar') { <svg lucideGuitar></svg> }
+                @default { <svg lucideMountain></svg> }
+              }
+            </span>
+            {{ item.tag }}
+          </p>
           <h3 class="card-title">{{ item.title }}</h3>
           <p class="card-summary">{{ item.text }}</p>
         </li>
@@ -117,10 +162,17 @@
   <section class="section" id="contacto">
     <h2 class="section-head"><span class="num">{{ contact.number }}</span> {{ contact.title }}</h2>
     <p class="section-lead">{{ contact.lead }}</p>
-    <p class="contact-mail"><a [href]="'mailto:' + contact.email">{{ contact.email }}</a></p>
-    <ul class="links">
+    <p class="contact-mail">
+      <a [href]="'mailto:' + contact.email"><svg lucideMail></svg> {{ contact.email }}</a>
+    </p>
+    <p class="meta-line contact-note">{{ contact.emailNote }}</p>
+    <ul class="links contact-links">
       @for (link of contact.links; track link.href) {
-        <li><a [href]="link.href" rel="me noopener" target="_blank">{{ link.label }}</a></li>
+        <li>
+          <a [href]="link.href" rel="me noopener" target="_blank"
+            >{{ link.label }} <svg lucideArrowUpRight></svg
+          ></a>
+        </li>
       }
     </ul>
   </section>

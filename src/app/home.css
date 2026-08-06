@@ -10,10 +10,10 @@
    viewport sigue siendo autocontenido. Ver la enmienda en docs/DESIGN.md. */
 .hero {
   display: grid;
-  gap: var(--space-8);
+  gap: var(--space-6);
   min-height: 92svh;
   align-content: space-between;
-  padding: var(--space-8) 0 var(--space-12) var(--margin-rule-offset);
+  padding: var(--space-6) 0 var(--space-8) var(--margin-rule-offset);
 }
 
 /* Tres bloques repartidos en la altura: marca arriba, entradilla en el
@@ -22,7 +22,7 @@
 .hero-main {
   display: grid;
   gap: var(--space-2);
-  padding-top: var(--space-12);
+  padding-top: var(--space-6);
 }
 
 .hero-main .eyebrow {
@@ -61,8 +61,63 @@
 
 .lead {
   margin: 0;
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
   line-height: var(--leading-body);
+  max-width: var(--measure);
+}
+
+/* La entradilla deja de flotar sola: la ficha de datos la ancla por la
+   derecha y de paso dice cosas que el párrafo no dice. */
+.hero-body {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+  margin: 0;
+  align-content: start;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-ink-soft);
+}
+
+.fact dt {
+  /* En móvil los rótulos ocupan tres líneas que no caben en la primera
+     pantalla; el dato se entiende solo, así que se lee pero no se pinta. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.fact dd {
+  margin: 0;
+}
+
+/* Una sola frase rota bajo el rol. Es la única animación de la web. */
+.tagline {
+  margin: var(--space-2) 0 0;
+  min-height: 1.6em;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  animation: fade var(--transition);
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tagline {
+    animation: none;
+  }
 }
 
 .links {
@@ -140,6 +195,53 @@
 
 .groups dd {
   margin: 0 0 var(--space-4);
+}
+
+/* Fig. 01: el diagrama se dibuja con los tokens, no con una imagen. Papel,
+   filete y mono, igual que el resto de la hoja. */
+.flow {
+  margin: var(--space-12) 0 0;
+  max-width: none;
+}
+
+.flow svg {
+  width: 100%;
+  height: auto;
+}
+
+.flow rect {
+  fill: var(--color-paper-deep);
+  stroke: var(--color-rule-strong);
+  stroke-width: 1;
+}
+
+.flow text {
+  fill: var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  text-anchor: middle;
+}
+
+/* Las líneas son líneas: con fill heredado, el trazo discontinuo se cerraba
+   sobre sí mismo y salía un manchón. La punta de flecha sí se rellena. */
+.flow path {
+  fill: none;
+  stroke: var(--color-ink-soft);
+  stroke-width: 1.25;
+}
+
+.flow marker path {
+  fill: var(--color-ink-soft);
+  stroke: none;
+}
+
+.flow figcaption {
+  max-width: var(--measure);
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: var(--leading-snug);
+  color: var(--color-ink-soft);
 }
 
 /* Lo secundario se lee como secundario: mono pequeña, no cuerpo. */
@@ -231,10 +333,66 @@
   font-size: var(--text-base);
 }
 
+.card-tag {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.card-icon svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  stroke: var(--color-ink-soft);
+  stroke-width: var(--icon-stroke);
+  fill: none;
+}
+
+/* El contacto es la sección por la que existe la página: se le da el tamaño
+   que le toca, no tres enlaces sueltos al final. */
 .contact-mail {
-  margin: 0 0 var(--space-4);
+  margin: 0 0 var(--space-2);
   font-family: var(--font-mono);
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
+}
+
+.contact-mail a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.contact-mail svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke);
+  fill: none;
+}
+
+.contact-note {
+  margin-bottom: var(--space-8);
+}
+
+/* El cierre necesita cuerpo: una sección de tres líneas al final nunca llega
+   a marcarse en el índice, y es la sección por la que existe la página. */
+#contacto {
+  min-height: 60svh;
+  padding-bottom: var(--space-24);
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.contact-links svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: var(--icon-stroke);
+  fill: none;
 }
 
 .card-links {
@@ -248,8 +406,34 @@
 }
 
 @media (min-width: 64rem) {
+  .hero-body,
   .hero-foot {
     max-width: calc(var(--measure) + 18rem + var(--space-12));
+  }
+
+  .hero-body {
+    grid-template-columns: minmax(0, var(--measure)) minmax(0, 18rem);
+    column-gap: var(--space-12);
+  }
+
+  .lead {
+    font-size: var(--text-lg);
+  }
+
+  /* En desktop sí hay sitio: la ficha vuelve a ser ficha, con sus rótulos. */
+  .facts {
+    display: grid;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--color-ink);
+  }
+
+  .fact dt {
+    position: static;
+    width: auto;
+    height: auto;
+    clip-path: none;
+    margin-bottom: var(--space-1);
   }
 
   /* Empresa y periodo salen al margen, alineados con el puesto que anotan. */
@@ -282,8 +466,10 @@
     max-width: none;
   }
 
+  /* Cuatro fichas en dos columnas: en tres quedaba una suelta en la segunda
+     fila y el bloque se leía a medias. */
   .bento {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .project-card {
