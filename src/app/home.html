@@ -84,4 +84,19 @@
       }
     </ul>
   </section>
+
+  <section class="section" id="apendice">
+    <h2 class="section-head"><span class="num">{{ appendix.number }}</span> {{ appendix.title }}</h2>
+    <p class="section-lead">{{ appendix.note }}</p>
+    <ul class="cards bento">
+      @for (item of appendix.items; track item.tag) {
+        <li class="card">
+          <p class="meta-line">{{ item.tag }}</p>
+          <h3 class="card-title">{{ item.title }}</h3>
+          <p class="card-summary">{{ item.text }}</p>
+        </li>
+      }
+    </ul>
+  </section>
+
 </main>

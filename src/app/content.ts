@@ -135,6 +135,40 @@ export const copy = {
       verify: { label: 'Verificar', href: 'https://verify.skilljar.com/c/7nzxnt37mbfi' },
     },
 
+    appendix: {
+      number: '06',
+      title: 'Apéndice A — Fuera del código',
+      note: 'Cinco líneas para que la conversación no empiece por el currículum.',
+      items: [
+        {
+          tag: 'A.1',
+          title: 'Sudoku',
+          text: 'Jugador de toda la vida; acabé construyendo el entrenador que me habría gustado tener.',
+        },
+        {
+          tag: 'A.2',
+          title: 'Electrónica de sobremesa',
+          text: 'Desmonto aparatos para entender cómo están hechos. Volver a montarlos es opcional.',
+        },
+        {
+          tag: 'A.3',
+          title: 'TCGs',
+          text: 'Juegos de cartas coleccionables: lectura de patrones y probabilidad disfrazadas de afición.',
+        },
+        {
+          tag: 'A.4',
+          title: 'Guitarra',
+          text: 'La práctica deliberada, aplicada a algo que no compila.',
+        },
+        {
+          tag: 'A.5',
+          title: 'Moto y montaña',
+          text: 'Donde no llega la cobertura.',
+        },
+      ],
+    },
+
+
     seo: {
       title: 'Pau Miquel — Full stack TypeScript con IA aplicada',
       description:

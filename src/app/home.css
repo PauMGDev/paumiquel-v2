@@ -144,6 +144,13 @@
   color: var(--color-ink-soft);
 }
 
+/* El apéndice va en bento: fichas cortas, no lista plana (enmienda de
+   docs/DESIGN.md). Mismo papel y mismo filete que las de proyecto. */
+.bento .card-summary {
+  margin-top: var(--space-2);
+  font-size: var(--text-base);
+}
+
 .card-links {
   display: flex;
   gap: var(--space-6);
@@ -192,6 +199,13 @@
 
   .groups {
     grid-template-columns: 8rem minmax(0, 1fr);
+    max-width: none;
+  }
+
+  /* El bento usa el ancho completo de la hoja; las fichas de proyecto no,
+     porque su texto es de lectura larga y el bento es de vistazo. */
+  .bento {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: none;
   }
 
