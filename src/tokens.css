@@ -1,0 +1,105 @@
+/**
+ * Sistema de tokens — paumiquel.com v2
+ *
+ * Único archivo de tokens del proyecto (invariante de CLAUDE.md). Se deriva
+ * de docs/DESIGN.md: dirección "cuaderno de ingeniería, voz editorial".
+ * Ningún color, tamaño, espaciado o duración vive fuera de aquí.
+ *
+ * Los ratios de contraste anotados los calcula `node scripts/contrast.mjs`
+ * sobre este mismo archivo. Si tocas un color, vuelve a pasarlo: el comentario
+ * caduca, el script no.
+ */
+
+:root {
+  /* --- Papel y tinta ------------------------------------------------ */
+
+  /* Papel: blanco cálido roto. Un blanco puro delata la pantalla; este
+     tiene el amarillo justo para leerse como hoja sin virar a crema. */
+  --color-paper: #faf9f6;
+
+  /* Papel de ficha: mismo tono, un paso más hondo. Separa bloques sin
+     recurrir a sombras, que esta dirección prohíbe. */
+  --color-paper-deep: #f2efe7;
+
+  /* Tinta: casi-negro cálido. El negro puro sobre papel cálido chirría. */
+  --color-ink: #1c1b1a; /* sobre papel: 16.33:1 — AAA */
+
+  /* Tinta secundaria: marginalia, fechas, metadatos. */
+  --color-ink-soft: #55514b; /* sobre papel: 7.48:1 — AAA */
+
+  /* Filete: retícula visible, tinta al ~16%. Elemento decorativo, no
+     transmite información por sí solo: no se le exige ratio de texto. */
+  --color-rule: #d8d4cb;
+
+  /* Filete acentuado: la línea de margen del cuaderno. */
+  --color-rule-strong: #c3bdb1;
+
+  /* --- Acentos ------------------------------------------------------ */
+
+  /* Azul tinta: enlaces y acción. La única tinta de anotación del sistema. */
+  --color-accent: #1d4ed8; /* sobre papel: 6.37:1 — AA */
+
+  /* Azul tinta pisado: hover y foco. */
+  --color-accent-strong: #16389b; /* sobre papel: 9.62:1 — AAA */
+
+  /* Rojo lápiz: subrayado de corrección. Ultraescaso — 2 o 3 usos en toda
+     la web, según docs/DESIGN.md. */
+  --color-pencil: #a32e22; /* sobre papel: 6.71:1 — AA */
+
+  /* Verde sello: el indicador de disponibilidad. */
+  --color-seal: #2f6b4f; /* sobre papel: 5.98:1 — AA */
+
+  /* --- Tipografía --------------------------------------------------- */
+
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Escala tipográfica. Mobile-first: los tres tamaños grandes crecen con
+     el viewport, el resto son fijos porque la marginalia no debe escalar. */
+  --text-2xs: 0.6875rem; /* 11px — sello, etiquetas de ficha */
+  --text-xs: 0.75rem; /* 12px — marginalia, pies de figura */
+  --text-sm: 0.875rem; /* 14px — metadatos */
+  --text-base: 1.0625rem; /* 17px — cuerpo. El serif pide un punto más */
+  --text-lg: clamp(1.1875rem, 1.1rem + 0.4vw, 1.375rem);
+  --text-xl: clamp(1.375rem, 1.2rem + 0.9vw, 1.75rem);
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.7vw, 2.5rem);
+  --text-3xl: clamp(2.25rem, 1.6rem + 3.2vw, 3.75rem);
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.3;
+  --leading-body: 1.6;
+
+  --tracking-label: 0.08em; /* mono en versalitas: etiquetas y eyebrows */
+  --tracking-tight: -0.015em; /* títulos grandes: el display respira solo */
+
+  --weight-body: 400;
+  --weight-medium: 500;
+  --weight-bold: 650;
+
+  /* Ancho de columna de lectura. 66 caracteres, el óptimo editorial. */
+  --measure: 34rem;
+
+  /* --- Espaciado ---------------------------------------------------- */
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* Margen de página y línea de margen del cuaderno. */
+  --page-gutter: clamp(1.25rem, 4vw, 3rem);
+  --margin-rule-offset: clamp(1rem, 3.2vw, 2.25rem);
+  --page-max: 68rem;
+
+  /* --- Materia ------------------------------------------------------ */
+
+  --rule-width: 1px;
+  --radius: 2px; /* el papel no tiene border-radius */
+  --transition: 150ms ease; /* techo de docs/DESIGN.md */
+  --icon-stroke: 1.5;
+}
