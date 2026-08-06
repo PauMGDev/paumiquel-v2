@@ -4,7 +4,19 @@
  */
 export const copy = {
   home: {
-    marker: 'Fig. 00 — scaffold prerenderizado',
+    // El stack completo y el bloque de IA de la v1 no viven aquí: bajan a las
+    // secciones de 2.2. El primer viewport tiene que caber entero.
+    hero: {
+      eyebrow: 'Portfolio',
+      name: 'Pau Miquel',
+      role: 'Full stack · TypeScript · IA aplicada',
+      lead: 'Ingeniero de software con cerca de tres años construyendo aplicaciones web en entornos profesionales. Hoy añado la capa de IA donde resuelve algo que el código convencional no resuelve mejor.',
+      links: [
+        { label: 'GitHub', href: 'https://github.com/PauMGDev' },
+        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/paumiquelguinot/' },
+      ],
+      availability: { state: 'disponible', detail: 'agosto 2026' },
+    },
     seo: {
       title: 'Pau Miquel — Full stack TypeScript con IA aplicada',
       description:

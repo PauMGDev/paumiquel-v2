@@ -1,0 +1,17 @@
+<main class="sheet">
+  <section class="hero">
+    <p class="eyebrow">{{ hero.eyebrow }}</p>
+    <h1 class="name">{{ hero.name }}</h1>
+    <p class="role">{{ hero.role }}</p>
+    <p class="lead">{{ hero.lead }}</p>
+    <ul class="links">
+      @for (link of hero.links; track link.href) {
+        <li><a [href]="link.href" rel="me noopener" target="_blank">{{ link.label }}</a></li>
+      }
+    </ul>
+    <p class="stamp">
+      {{ hero.availability.state }}
+      <span>{{ hero.availability.detail }}</span>
+    </p>
+  </section>
+</main>

@@ -5,10 +5,11 @@ import { SITE_URL, applySeo } from './seo';
 
 @Component({
   selector: 'app-home',
-  template: `<p>{{ copy.home.marker }}</p>`,
+  templateUrl: './home.html',
+  styleUrl: './home.css',
 })
 export class Home {
-  protected readonly copy = copy;
+  protected readonly hero = copy.home.hero;
 
   constructor() {
     applySeo({

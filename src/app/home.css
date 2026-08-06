@@ -1,0 +1,70 @@
+:host {
+  display: block;
+  padding-inline: var(--page-gutter);
+}
+
+/* El primer viewport tiene que caber entero: min-height nunca corta —hace
+   crecer, no recortar— y el contenido se queda por debajo del alto útil de
+   un iPhone SE. Ver la enmienda de dirección en docs/DESIGN.md. */
+.hero {
+  display: grid;
+  gap: var(--space-4);
+  min-height: 76svh;
+  align-content: center;
+  padding: var(--space-12) 0 var(--space-16) var(--margin-rule-offset);
+}
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.name {
+  font-size: var(--text-3xl);
+}
+
+.role {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.lead {
+  margin: 0;
+  font-size: var(--text-lg);
+  line-height: var(--leading-body);
+}
+
+.links {
+  display: flex;
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+@media (min-width: 64rem) {
+  /* El sello sube al margen derecho, que es donde vive la anotación. */
+  .hero {
+    grid-template-columns: minmax(0, var(--measure)) minmax(0, 18rem);
+    column-gap: var(--space-12);
+    justify-items: start;
+  }
+
+  .hero > * {
+    grid-column: 1;
+  }
+
+  .hero > .stamp {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    align-self: start;
+  }
+}
