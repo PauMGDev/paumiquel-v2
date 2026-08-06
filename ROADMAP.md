@@ -37,7 +37,7 @@ editando este archivo: lo impide `.claude/hooks/protect-roadmap.mjs`.
       cortados al entrar, en ningún breakpoint (ver enmienda en docs/DESIGN.md).
 - [x] 2.2 Stack, experiencia, formación y certificación (migración de
       contenido desde la v1).
-- [ ] 2.3 Proyectos, con tarjeta nueva del playbook.
+- [x] 2.3 Proyectos, con tarjeta nueva del playbook.
 - [ ] 2.4 "Apéndice A — Fuera del código" + contacto.
       Done por paso: ruta completa en el HTML de build, verificada en 375px.
 
@@ -323,3 +323,16 @@ queda o la señal que hay que vigilar.
   con la home ya llena: las cuatro categorías de Lighthouse siguen en 100 y el
   LCP baja a 1,0s. Regla que queda: un criterio que se repite en cinco pasos
   deja de comprobarse a mano a la segunda vez.
+
+- 2026-08-06 (2.3): la ficha del playbook se escribe como método más prueba,
+  no como proyecto suelto: enlaza al playbook y a esta misma web, cuyo repo es
+  público y cuyo ROADMAP lleva la bitácora de cada decisión y cada fricción.
+  Es el único proyecto de la lista que un evaluador puede auditar mientras lo
+  lee, y eso vale más que cualquier adjetivo que se pudiera escribir sobre el
+  método. Se añadió al done una comprobación que no estaba prevista: `curl` a
+  los seis enlaces de la sección, los seis en 200. Regla que queda: en un
+  portfolio, un enlace muerto hace más daño que la ausencia del enlace, así
+  que los enlaces se comprueban en el paso que los añade, no en la auditoría
+  final. Señal a vigilar: cuando entre el case study en 4.1, la lista de
+  enlaces crece y esa comprobación deja de ser cómoda a mano.
+
