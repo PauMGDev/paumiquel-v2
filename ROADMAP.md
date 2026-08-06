@@ -269,6 +269,27 @@ queda o la señal que hay que vigilar.
   URL no empiece por el nombre del proyecto es un despliegue desde el sitio
   equivocado.
 
+- 2026-08-07 (1.3): bug de compartido reportado por test externo, verificado
+  con fetch real y no con suposición. `og:image` apunta a
+  https://paumiquel.com/og/home.png (decisión de URLs definitivas de 1.3),
+  pero ese dominio sirve todavía la v1, que es una SPA con fallback: la ruta
+  devuelve 200 con text/html —su index— en vez del PNG, y el scraper que va
+  a por la imagen recibe HTML y la descarta. En el deployment de la v2 el
+  archivo sí se genera y se sirve (paumiquel-v2.vercel.app/og/home.png →
+  200 image/png, 1200x630). No es caché del cliente: es que la URL escrita
+  no sirve la imagen hoy. La decisión de 1.3 era correcta para los punteros
+  —canonical y og:url no se descargan, solo se leen—, pero og:image es un
+  recurso que el consumidor descarga en el momento de compartir, y tiene que
+  resolver desde el día uno. Arreglo pendiente (dueño: 5.3 o antes): subir
+  og/home.png al proyecto de la v1 —también en Vercel— para que la URL
+  definitiva sirva el PNG ya, sin tocar el cutover. Tras el arreglo, los
+  scrapers cachean el fallo: purgar con Facebook Sharing Debugger ("Scrape
+  Again"), LinkedIn Post Inspector y @WebpageBot de Telegram; WhatsApp cachea
+  en el cliente hasta ~30 días y no se puede forzar. Regla que queda: los
+  punteros pueden apuntar al futuro; los recursos que se descargan tienen que
+  resolver hoy. Señal a vigilar: el fallback de SPA convierte cualquier 404
+  en un 200 text/html — verificar content-type, nunca solo el status.
+
 ### F2 — Home
 
 - 2026-08-06 (2.1): DESIGN.md pedía migración literal del hero de la v1 y el
@@ -442,3 +463,21 @@ queda o la señal que hay que vigilar.
   cuando el primer viewport no da, se comprime la forma, nunca se esconde
   información. Señal a vigilar: cualquier `clip-path: inset(50%)` nuevo que no
   sea un salto de accesibilidad de verdad.
+
+- 2026-08-07 (F3): test externo en móvil sobre la Fig. 02, dos hallazgos con
+  un arreglo cada uno. El hueco 2024-2025 domina la figura en viewport
+  estrecho y solo lo explicaba el pie: ahora el hueco es una fila cronológica
+  más de la línea temporal —ticks en sus fechas, trazo discontinuo y rótulo
+  en mono "máster · formación"— en las dos orientaciones. En la ancha lee
+  como una cota de plano y en la apilada ocupa el carril que tendría su
+  barra: el mismo derecho a hoja que las etapas, que es lo que el dato pide.
+  El pie se mantiene y la anotación lo complementa. Y las barras apiladas
+  perdían la forma: el descuadre de la tabla fija (±1,9 unidades) es carácter
+  en una caja de 150 pero deforma una barra de 8, así que `box()` escala el
+  temblor en proporción por debajo de 24 unidades de lado menor. Con eso la
+  vertical se salva y no hace falta alternativa de figura para móvil. Regla
+  que queda: cuando un vacío es dato, se anota donde ocurre —dentro de la
+  figura—, no solo en el pie; y el trazo a mano se escala al tamaño de lo que
+  dibuja. Señal a vigilar: las figuras del case study (F4) traerán cajas de
+  otros tamaños; si alguna sale o rígida o deforme, el umbral de 24 es lo
+  primero que revisar.
