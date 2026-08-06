@@ -38,7 +38,7 @@ editando este archivo: lo impide `.claude/hooks/protect-roadmap.mjs`.
 - [x] 2.2 Stack, experiencia, formación y certificación (migración de
       contenido desde la v1).
 - [x] 2.3 Proyectos, con tarjeta nueva del playbook.
-- [ ] 2.4 "Apéndice A — Fuera del código" + contacto.
+- [x] 2.4 "Apéndice A — Fuera del código" + contacto.
       Done por paso: ruta completa en el HTML de build, verificada en 375px.
 
 ## F3 — Sesión de diseño con Pau
@@ -335,4 +335,23 @@ queda o la señal que hay que vigilar.
   que los enlaces se comprueban en el paso que los añade, no en la auditoría
   final. Señal a vigilar: cuando entre el case study en 4.1, la lista de
   enlaces crece y esa comprobación deja de ser cómoda a mano.
+
+- 2026-08-06 (2.4): el apéndice reutiliza la ficha de proyectos con una
+  variante, no un componente nuevo: mismo papel, mismo filete, misma etiqueta
+  en mono, y la única diferencia es que en desktop ocupa las tres columnas de
+  la hoja mientras las fichas de proyecto se quedan en la columna de lectura.
+  El motivo es de lectura, no de estética: el proyecto se lee entero y el
+  apéndice se lee de un vistazo. Regla que queda: una variante con una razón
+  escrita antes que un componente nuevo. Con F2 cerrada, la home entera mide
+  100 en las cuatro categorías de Lighthouse, LCP 0,9s y CLS 0, y el primer
+  viewport sigue autocontenido en los cuatro tamaños.
+
+- 2026-08-06 (2.4): fricción de método. El paso tenía dos intenciones
+  —apéndice y contacto— tocando los mismos cuatro archivos, así que para
+  cumplir "un commit por intención" hubo que construir el apéndice, commitear,
+  y añadir después el contacto. Salió bien, pero es artesanía frágil: el orden
+  correcto es escribir cada intención completa antes de empezar la siguiente,
+  no separarlas a posteriori con edición de texto. Señal a vigilar: si vuelve
+  a hacer falta reconstruir un estado intermedio para poder commitear, el paso
+  estaba mal troceado desde el plan.
 
