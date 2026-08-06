@@ -98,6 +98,42 @@
   }
 }
 
+/* Subrayado a mano (artefacto 1 de docs/DESIGN.md). Trazo con dos curvas que
+   no cierran donde cerraría una regla: un border-bottom recto es exactamente
+   el gesto que esta capa viene a corregir.
+
+   El trazo es una máscara, no una imagen con color propio: la tinta la pone
+   currentColor, así que el subrayado es de la tinta del texto que subraya y
+   sigue al hover del enlace sin una segunda regla. El sistema sigue teniendo
+   un único acento (NOTA F3); el negro del SVG es alfa de máscara, no un
+   color de la paleta.
+
+   El trazo vive en un pseudo-elemento y no en el fondo del span: una máscara
+   recorta todo lo que pinta el elemento, también su texto, y sobre el span
+   se llevaba por delante la frase entera. */
+/* inline-block y no inline: un span inline que parte en dos líneas deja el
+   trazo colgado del último fragmento, y dónde cae exactamente depende del
+   motor. Como bloque encogido al contenido, el trazo mide lo que mide el
+   texto cuando cabe en una línea, y cuando no cabe cierra el bloque entero.
+   Igual en todos los navegadores. */
+.underline {
+  position: relative;
+  display: inline-block;
+}
+
+.underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.22em;
+  height: 0.5em;
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 10' preserveAspectRatio='none'%3E%3Cpath d='M3 7.4C34 4.2 63 8.6 97 5.6c28-2.5 63 3.1 100-0.6' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
 .links {
   display: flex;
   gap: var(--space-6);
@@ -299,7 +335,29 @@
 }
 
 /* El apéndice va en bento: fichas cortas, no lista plana (enmienda de
-   docs/DESIGN.md). Mismo papel y mismo filete que las de proyecto. */
+   docs/DESIGN.md). Fichas de índice sobre una mesa (artefacto 3): giro
+   alterno de medio grado, filete marcado y la etiqueta A.x montada a
+   caballo del borde superior, como la pestaña de un fichero. Con la
+   etiqueta dentro de la caja y el filete flojo parecían campos de
+   formulario deshabilitados. */
+.bento {
+  margin-top: var(--space-3);
+}
+
+.bento .card {
+  position: relative;
+  padding-top: var(--space-6);
+  border-color: var(--color-rule-strong);
+}
+
+.bento .card:nth-child(odd) {
+  rotate: -0.5deg;
+}
+
+.bento .card:nth-child(even) {
+  rotate: 0.6deg;
+}
+
 .bento .card-summary {
   margin-top: var(--space-2);
   font-size: var(--text-base);
@@ -309,6 +367,19 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
+}
+
+.bento .card-tag {
+  position: absolute;
+  top: 0;
+  left: var(--space-4);
+  translate: 0 -50%;
+  padding: 1px var(--space-2);
+  border: var(--rule-width) solid var(--color-rule-strong);
+  border-radius: var(--radius);
+  /* Misma cartulina que la ficha: una pestaña es la ficha recortada, no una
+     etiqueta pegada encima. */
+  background: var(--color-paper-deep);
 }
 
 .card-icon svg {
@@ -328,10 +399,13 @@
   font-size: var(--text-xl);
 }
 
+/* El correo lleva subrayado a mano, así que suelta el recto: dos subrayados
+   sobre la misma palabra no son énfasis, son un error. */
 .contact-mail a {
   display: inline-flex;
   align-items: center;
   gap: var(--space-3);
+  text-decoration: none;
 }
 
 .contact-mail svg {

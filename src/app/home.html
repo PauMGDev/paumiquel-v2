@@ -19,7 +19,7 @@
       <p class="eyebrow">{{ hero.eyebrow }}</p>
       <h1 class="name">{{ hero.name }}</h1>
       <p class="role">{{ hero.role }}</p>
-      <p class="tagline" aria-live="off">{{ tagline() }}</p>
+      <p class="tagline" aria-live="off"><span class="underline">{{ tagline() }}</span></p>
       <p class="lead">{{ hero.lead }}</p>
     </div>
 
@@ -159,7 +159,9 @@
     <h2 class="section-head"><span class="num">{{ contact.number }}</span> {{ contact.title }}</h2>
     <p class="section-lead">{{ contact.lead }}</p>
     <p class="contact-mail">
-      <a [href]="'mailto:' + contact.email"><svg lucideMail></svg> {{ contact.email }}</a>
+      <a [href]="'mailto:' + contact.email"
+        ><svg lucideMail></svg> <span class="underline">{{ contact.email }}</span></a
+      >
     </p>
     <p class="meta-line contact-note">{{ contact.emailNote }}</p>
     <ul class="links contact-links">

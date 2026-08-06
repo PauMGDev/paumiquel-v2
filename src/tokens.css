@@ -21,6 +21,14 @@
      recurrir a sombras, que esta dirección prohíbe. */
   --color-paper-deep: #f2efe7;
 
+  /* El papel con su grano encima, en el punto más oscuro que alcanza el
+     ruido (F3, artefacto 2). No se pinta con este token: es el fondo real
+     contra el que se lee el texto. Se mide sobre la página servida —36.000
+     píxeles de papel limpio, y de todos ellos el más oscuro— y se guarda
+     el peor valor de las medidas, para que scripts/contrast.mjs juzgue el
+     peor caso y no el ideal. Si cambia la opacidad del grano, se remide. */
+  --color-paper-grained: #f2f0ed;
+
   /* Tinta: casi-negro cálido. El negro puro sobre papel cálido chirría. */
   --color-ink: #1c1b1a; /* sobre papel: 16.33:1 — AAA */
 

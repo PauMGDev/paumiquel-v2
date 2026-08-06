@@ -34,6 +34,7 @@ html {
 
 body {
   margin: 0;
+  position: relative;
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-display);
@@ -42,6 +43,29 @@ body {
   line-height: var(--leading-body);
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Grano de papel (artefacto 2 de docs/DESIGN.md). La diferencia entre "blanco
+   roto" y papel es textura, no hex: una capa de ruido fractal al 3,5% sobre
+   toda la hoja. Va en absoluto y no en fijo: con el grano clavado al viewport
+   la textura se queda quieta mientras el texto rueda por encima, que es un
+   efecto de pantalla. El grano es del papel, así que viaja con el papel.
+
+   Va como MÁSCARA de una capa de tinta, no como imagen con su propio color:
+   así el único color sigue viniendo del sistema de tokens. Y va detrás del
+   contenido (z-index -1 sobre un body sin contexto de apilamiento), de modo
+   que el grano nunca se interpone entre el texto y quien lee; el contraste
+   medido lo confirma en scripts/contrast.mjs. */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--color-ink);
+  opacity: 0.035;
+  pointer-events: none;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+  mask-size: 180px 180px;
 }
 
 h1,

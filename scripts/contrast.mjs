@@ -21,6 +21,15 @@ const PAIRS = [
   ['color-accent', 'color-paper', AA_TEXT, 'enlaces'],
   ['color-accent-strong', 'color-paper', AA_TEXT, 'enlaces en hover y foco'],
   ['color-seal', 'color-paper', AA_TEXT, 'sello de disponibilidad'],
+
+  /* El grano de F3 oscurece el papel un punto: el fondo real del texto ya no
+     es el papel limpio sino su píxel más oscuro, y es el que hay que pasar.
+     La ficha no entra: tiene fondo propio y opaco, y tapa el grano. */
+  ['color-ink', 'color-paper-grained', AA_TEXT, 'cuerpo sobre papel con grano'],
+  ['color-ink-soft', 'color-paper-grained', AA_TEXT, 'marginalia sobre grano'],
+  ['color-accent', 'color-paper-grained', AA_TEXT, 'enlaces sobre grano'],
+  ['color-accent-strong', 'color-paper-grained', AA_TEXT, 'hover y foco sobre grano'],
+  ['color-seal', 'color-paper-grained', AA_TEXT, 'sello sobre grano'],
 ];
 
 /* Los filetes (--color-rule, --color-rule-strong) no entran en la lista: son
