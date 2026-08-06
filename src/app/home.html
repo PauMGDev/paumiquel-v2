@@ -20,32 +20,28 @@
       <h1 class="name">{{ hero.name }}</h1>
       <p class="role">{{ hero.role }}</p>
       <p class="tagline" aria-live="off">{{ tagline() }}</p>
-    </div>
-
-    <div class="hero-body">
       <p class="lead">{{ hero.lead }}</p>
-
-      <dl class="facts">
-        @for (fact of hero.facts; track fact.label) {
-          <div class="fact">
-            <dt class="meta-line">{{ fact.label }}</dt>
-            <dd>{{ fact.value }}</dd>
-          </div>
-        }
-      </dl>
     </div>
 
-    <div class="hero-foot">
-      <ul class="links">
-        @for (link of hero.links; track link.href) {
-          <li><a [href]="link.href" rel="me noopener" target="_blank">{{ link.label }}</a></li>
-        }
-      </ul>
-      <p class="stamp">
-        {{ hero.availability.state }}
-        <span>{{ hero.availability.detail }}</span>
-      </p>
-    </div>
+    <dl class="facts">
+      @for (fact of hero.facts; track fact.label) {
+        <div class="fact">
+          <dt class="meta-line">{{ fact.label }}</dt>
+          <dd>{{ fact.value }}</dd>
+        </div>
+      }
+    </dl>
+
+    <ul class="links">
+      @for (link of hero.links; track link.href) {
+        <li><a [href]="link.href" rel="me noopener" target="_blank">{{ link.label }}</a></li>
+      }
+    </ul>
+
+    <p class="stamp">
+      {{ hero.availability.state }}
+      <span>{{ hero.availability.detail }}</span>
+    </p>
   </section>
 
   <section class="section" id="stack">

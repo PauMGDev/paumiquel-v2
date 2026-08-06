@@ -103,18 +103,29 @@ hr {
 /* --- Índice ---------------------------------------------------------------
    Pestañas de cuaderno: fuera de la hoja, pegadas al scroll, marcando la
    sección en la que estás. Solo aparece cuando hay margen real que ocupar;
-   por debajo de eso sería un estorbo, y los enlaces ya viven en el HTML. */
+   por debajo de eso sería un estorbo, y los enlaces ya viven en el HTML.
+
+   Decisión de carril (F3, docs/DESIGN.md → Composición y ritmo): se elige
+   ESTRECHAR. El índice se ancla al borde izquierdo de la hoja en vez de
+   flotar en una posición propia, y no pasa de 220px. Anclado, el carril
+   deja de ser un elemento suelto y pasa a ser el margen de la hoja; si no
+   hay margen, no hay índice. A 80rem lo había en el papel pero no en la
+   pantalla: el índice acababa en 150px y la hoja empezaba en 96px, o sea
+   encima. Por eso el umbral sube a 90rem, el primer ancho donde el carril
+   cabe entero fuera de la hoja. */
 .index {
   display: none;
 }
 
-@media (min-width: 80rem) {
+@media (min-width: 90rem) {
   .index {
     display: block;
     position: fixed;
     top: 50%;
-    left: var(--space-6);
+    right: calc(50% + var(--page-max) / 2);
     translate: 0 -50%;
+    width: min(13.75rem, calc(50vw - var(--page-max) / 2 - var(--space-6)));
+    padding-right: var(--space-6);
     z-index: 1;
   }
 
@@ -162,9 +173,11 @@ hr {
 }
 
 /* Sección numerada: el filete de arriba es la retícula visible de la
-   dirección, y la numeración es del documento, no de cada componente. */
+   dirección, y la numeración es del documento, no de cada componente.
+   El aire alrededor del filete se comprimió en F3: separa capítulos, no
+   los aleja. */
 .section {
-  padding: var(--space-12) 0 var(--space-12) var(--margin-rule-offset);
+  padding: var(--space-8) 0 var(--space-8) var(--margin-rule-offset);
   border-top: var(--rule-width) solid var(--color-rule);
 }
 

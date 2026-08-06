@@ -3,40 +3,25 @@
   padding-inline: var(--page-gutter);
 }
 
-/* El hero ocupa la pantalla y reparte su contenido en ella: marca arriba,
-   nombre y entradilla al centro, enlaces y sello abajo. Centrarlo dejaba dos
-   cinturones de aire muerto y aun así la sección 01 asomaba por debajo.
-   min-height nunca corta —hace crecer, no recortar—, así que el primer
-   viewport sigue siendo autocontenido. Ver la enmienda en docs/DESIGN.md. */
+/* El hero es UNA composición, no tres bloques repartidos en la altura de la
+   pantalla (docs/DESIGN.md, Composición y ritmo). Estirarlo a 92svh con
+   space-between dejaba dos cinturones de aire muerto de ~200px: aire sin
+   contenido, que es lo que la dirección prohíbe desde F3. Aquí el hero mide
+   lo que mide su contenido y la sección 01 asoma por debajo — un cuaderno
+   está lleno. */
 .hero {
   display: grid;
   gap: var(--space-6);
-  min-height: 92svh;
-  align-content: space-between;
-  padding: var(--space-6) 0 var(--space-8) var(--margin-rule-offset);
+  padding: var(--space-8) 0 var(--space-12) var(--margin-rule-offset);
 }
 
-/* Tres bloques repartidos en la altura: marca arriba, entradilla en el
-   centro óptico, enlaces y sello abajo. Con dos bloques quedaba un solo
-   hueco enorme en medio; con tres, el aire se reparte y se lee compuesto. */
 .hero-main {
   display: grid;
   gap: var(--space-2);
-  padding-top: var(--space-6);
 }
 
-.hero-main .eyebrow {
-  margin-bottom: var(--space-4);
-}
-
-/* El sello deja de flotar en el margen: se ancla al pie del hero, en la misma
-   línea que los enlaces. */
-.hero-foot {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-6);
+.hero-main .lead {
+  margin-top: var(--space-2);
 }
 
 .eyebrow {
@@ -66,13 +51,6 @@
   max-width: var(--measure);
 }
 
-/* La entradilla deja de flotar sola: la ficha de datos la ancla por la
-   derecha y de paso dice cosas que el párrafo no dice. */
-.hero-body {
-  display: grid;
-  gap: var(--space-6);
-}
-
 .facts {
   display: flex;
   flex-wrap: wrap;
@@ -100,7 +78,7 @@
 
 /* Una sola frase rota bajo el rol. Es la única animación de la web. */
 .tagline {
-  margin: var(--space-2) 0 0;
+  margin: 0;
   min-height: 1.6em;
   font-family: var(--font-mono);
   font-size: var(--text-sm);
@@ -134,13 +112,7 @@
 
 .section-lead {
   max-width: var(--measure);
-  margin: 0 0 var(--space-8);
-}
-
-/* Las secciones necesitaban leerse como capítulos, no como bloques pegados
-   uno detrás de otro: más aire arriba y numeración con más presencia. */
-.section {
-  padding-top: var(--space-16);
+  margin: 0 0 var(--space-4);
 }
 
 /* En desktop la entradilla se va al margen derecho como nota: es el mismo
@@ -189,18 +161,18 @@
 }
 
 .groups dt {
-  padding-top: var(--space-4);
+  padding-top: var(--space-3);
   border-top: var(--rule-width) solid var(--color-rule);
 }
 
 .groups dd {
-  margin: 0 0 var(--space-4);
+  margin: 0 0 var(--space-3);
 }
 
 /* Fig. 01: el diagrama se dibuja con los tokens, no con una imagen. Papel,
    filete y mono, igual que el resto de la hoja. */
 .flow {
-  margin: var(--space-12) 0 0;
+  margin: var(--space-8) 0 0;
   max-width: none;
 }
 
@@ -253,7 +225,7 @@
 }
 
 .entry {
-  padding-top: var(--space-8);
+  padding-top: var(--space-6);
   max-width: var(--measure);
 }
 
@@ -268,7 +240,7 @@
 
 .entry-lines,
 .entry-detail {
-  margin: var(--space-4) 0 0;
+  margin: var(--space-3) 0 0;
 }
 
 .entry-lines {
@@ -295,7 +267,7 @@
 
 .cards {
   display: grid;
-  gap: var(--space-6);
+  gap: var(--space-4);
   max-width: var(--measure);
   margin: 0;
   padding: 0;
@@ -371,14 +343,15 @@
 }
 
 .contact-note {
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-6);
 }
 
-/* El cierre necesita cuerpo: una sección de tres líneas al final nunca llega
-   a marcarse en el índice, y es la sección por la que existe la página. */
+/* El cierre es tres líneas y ocupa lo que ocupan tres líneas. Estirarlo a
+   60svh solo servía para que el índice lo marcara, y para eso ya está el
+   umbral del observador: media pantalla de aire para ganar un subrayado en
+   el margen es exactamente el vacío que la dirección prohíbe. */
 #contacto {
-  min-height: 60svh;
-  padding-bottom: var(--space-24);
+  padding-bottom: var(--space-16);
 }
 
 .contact-links a {
@@ -406,14 +379,42 @@
 }
 
 @media (min-width: 64rem) {
-  .hero-body,
-  .hero-foot {
+  /* Dos columnas: la prosa a la izquierda, la ficha de datos y el sello
+     pegados uno debajo del otro en el margen derecho, y los enlaces
+     cerrando por abajo. El sello va bajo la ficha y no al pie: repartir
+     las dos piezas del margen entre arriba y abajo abría un hueco de 280px
+     entre ellas, que es el vacío de página que la dirección prohíbe.
+     El orden del DOM no lo tocan las áreas, así que en móvil la pila sigue
+     siendo la de docs/DESIGN.md: bio, metadatos, enlaces y sello. */
+  .hero {
+    grid-template-columns: minmax(0, var(--measure)) minmax(0, 18rem);
+    grid-template-areas:
+      'main facts'
+      'main stamp'
+      'links links';
+    column-gap: var(--space-12);
+    row-gap: var(--space-6);
+    align-items: start;
     max-width: calc(var(--measure) + 18rem + var(--space-12));
   }
 
-  .hero-body {
-    grid-template-columns: minmax(0, var(--measure)) minmax(0, 18rem);
-    column-gap: var(--space-12);
+  /* Por hijo directo del hero: los enlaces de Contacto llevan la misma clase
+     .links, y con la regla suelta heredaban un grid-area que no es suyo y se
+     colaban por encima del correo. */
+  .hero > .hero-main {
+    grid-area: main;
+  }
+
+  .hero > .facts {
+    grid-area: facts;
+  }
+
+  .hero > .links {
+    grid-area: links;
+  }
+
+  .hero > .stamp {
+    grid-area: stamp;
   }
 
   .lead {
