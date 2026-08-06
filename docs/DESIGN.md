@@ -51,6 +51,10 @@ técnica bien editada, no de una app.
   ("[x] abierto a oportunidades" en mono, o un sello de tinta girado 2°).
 - PERSONA: "Apéndice A — Fuera del código", con formato de apéndice real.
   El chiste estructural ES el tono.
+- Iconos: si algún componente los necesita, la librería aprobada es
+  lucide-angular (importación icono a icono, strokeWidth desde token,
+  tamaños del sistema tipográfico). Proponer la instalación cuando el primer
+  componente la pida, no antes.
 
 ### Tipografía (2 familias; la pareja se cierra en 1.2)
 
