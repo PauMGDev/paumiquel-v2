@@ -66,10 +66,37 @@ Glow. Tarjetas con sombra flotante genérica. Bordes redondeados grandes
 de entrada aparatosas (permitido: transiciones discretas de 150ms o menos).
 Cualquier elemento que parezca de dashboard SaaS.
 
-### Referencias reales — PENDIENTE DE PAU
+### Referencias
 
-<3-4 URLs de webs que anclen la dirección, aunque cada una aporte un solo
-rasgo. Buscar en minimal.gallery y godly.website: "editorial", "brutalist".>
+Cada referencia aporta un rasgo nombrado; nada se copia entero. El agente
+obedece los rasgos, no las webs.
+
+- abhaysingh.in: bloques de metadatos por proyecto con notación →
+  (antes→después); voz de resultados en frases cortas con un seco puntual.
+- maggieappleton.com: SÍ el sistema (claro cálido, metadatos con alma,
+  densidad estructurada con ilustración). NO su hero: el primer viewport
+  de la v2 debe ser una composición completa y autocontenida — nada de
+  texto o elementos cortados al entrar, en ningún breakpoint.
+- s-minaya.github.io/sofia-minaya-portfolio: SÍ la estructura bento de su
+  sección about — aquí se traduce a "fichas de cuaderno": fondo papel,
+  filete de 1px, etiqueta en mono, sin sombras ni elevación. NO su piel
+  (oscuro, espacial, pixel art).
+- pudding.cool: figuras integradas en el flujo de lectura, con captions que
+  trabajan; retícula editorial seria sin frialdad. Referencia principal
+  para el tratamiento de figura del case study (F4).
+- tufte-css (edwardtufte.github.io/tufte-css): referencia técnica de
+  marginalia y sidenotes, no estética.
+
+DESCARTADO ciechanow.ski: densidad académica sin calidez. El cuaderno es de
+ingeniero, pero bonito: estructura con encanto, no paper seco.
+
+### Enmienda de dirección (tras las referencias)
+
+- El Apéndice A se maqueta como bento de fichas de cuaderno, no como lista
+  plana: cada ítem es una ficha con su etiqueta (A.1, A.2...) en mono.
+- Temperatura general: cuaderno cálido y hojeable, no apunte de laboratorio.
+- Requisito derivado para el 2.1 (añadir a su done en el ROADMAP): primer
+  viewport autocontenido, verificado en 375px y desktop.
 
 ## Contenido
 
@@ -82,10 +109,17 @@ SE AÑADE:
 
 a) Tarjeta del playbook (agentic-harness-playbook) en proyectos.
 b) Bloque persona: "Apéndice A — Fuera del código". Compacto: 3-5 ítems de
-   una línea, cero relleno, tono seco con humor fino. Contenido PENDIENTE
-   DE PAU; candidatos: sudoku (ahora con producto propio), gaming y el
-   proyecto de juego en pareja, cachimba, interiorismo. Función: dar al
-   entrevistador el arranque de conversación.
+   una línea, cero relleno, tono seco con humor fino. Función: dar al
+   entrevistador el arranque de conversación. Contenido:
+
+   A.1  Sudoku — jugador de toda la vida; acabé construyendo el entrenador
+        que me habría gustado tener (ver Sudoku Trainer).
+   A.2  Electrónica de sobremesa — desmonto aparatos para entender cómo
+        están hechos. Volver a montarlos es opcional.
+   A.3  TCGs — juegos de cartas coleccionables: lectura de patrones y
+        probabilidad disfrazadas de afición.
+   A.4  Guitarra — la práctica deliberada, aplicada a algo que no compila.
+   A.5  Moto y montaña — donde no llega la cobertura.
 c) Indicador de disponibilidad visible en el hero (estado, no párrafo).
 d) Case study: /proyectos/clasificador-email (F4): problema, arquitectura
    con diagrama, decisiones, resultados. Sin código propietario.
