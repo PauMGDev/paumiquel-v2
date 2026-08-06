@@ -35,7 +35,7 @@ editando este archivo: lo impide `.claude/hooks/protect-roadmap.mjs`.
 - [x] 2.1 Hero con la jerarquía actual + indicador de disponibilidad.
       Done añadido: primer viewport autocontenido — nada de texto o elementos
       cortados al entrar, en ningún breakpoint (ver enmienda en docs/DESIGN.md).
-- [ ] 2.2 Stack, experiencia, formación y certificación (migración de
+- [x] 2.2 Stack, experiencia, formación y certificación (migración de
       contenido desde la v1).
 - [ ] 2.3 Proyectos, con tarjeta nueva del playbook.
 - [ ] 2.4 "Apéndice A — Fuera del código" + contacto.
@@ -303,3 +303,23 @@ queda o la señal que hay que vigilar.
   vivir en un componente. Medido de paso al poner `<main>` y un `<h1>` único:
   accesibilidad de 94 a 100, con las cuatro categorías de Lighthouse en 100 y
   LCP de 1,1s.
+
+- 2026-08-06 (2.2): el Grado de la UJI se publica como "4 cursos, sin
+  titular", no como el "en curso" de la v1. Un evaluador técnico pregunta por
+  la formación en la entrevista, y la versión que sobrevive a esa pregunta es
+  la que ya venía escrita en la fórmula de docs/DESIGN.md. La v1 se consultó
+  en producción para migrar los datos, no se reconstruyeron de memoria: fechas,
+  empresas y líneas de resultado salen de la página viva. Regla que queda: en
+  un portfolio, el dato que hay que explicar en persona se escribe como se va
+  a explicar. Señal a vigilar: cualquier cifra o periodo que no se pueda
+  defender tal cual está escrito.
+
+- 2026-08-06 (2.2): la señal que dejó 2.1 se cumplió a la primera, así que el
+  check de viewport entró al repo con playwright como devDependency y
+  `pnpm check:viewport`. Sirve el build, mide la sección de entrada contra el
+  alto de pantalla en cuatro tamaños y falla si algo desborda a lo ancho; deja
+  las capturas en .viewport-shots/, fuera de git. Es dependencia de
+  desarrollo: no viaja al bundle ni toca el presupuesto de la página. Medido
+  con la home ya llena: las cuatro categorías de Lighthouse siguen en 100 y el
+  LCP baja a 1,0s. Regla que queda: un criterio que se repite en cinco pasos
+  deja de comprobarse a mano a la segunda vez.
