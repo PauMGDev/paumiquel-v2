@@ -65,6 +65,9 @@ export const copy = {
       ],
       figure: {
         caption: 'Fig. 01 — Flujo de una aplicación. La capa de IA cuelga del backend, nunca del navegador: el modelo recibe lo que el servidor decide, y nada más.',
+        // Descripción para lectores de pantalla. El pie visible hace de
+        // descripción larga; esto dice qué se ve, no qué significa.
+        label: 'Diagrama: navegador, Angular, NestJS y PostgreSQL encadenados, con la API de Claude colgando del backend por una línea discontinua.',
         nodes: ['Navegador', 'Angular', 'NestJS', 'PostgreSQL'],
         aside: 'Claude API',
       },
@@ -78,6 +81,22 @@ export const copy = {
       number: '02',
       title: 'Experiencia',
       lead: 'La capa de IA la construyo con workflows agénticos: Claude Code con contexto por capas, servidores MCP propios y subagentes especializados. La base sigue siendo la de siempre — arquitectura, testing y código que otro pueda mantener.',
+
+      // Las fechas van aquí en formato máquina porque la figura las dibuja;
+      // las de los puestos siguen escritas para leerse. El hueco entre barras
+      // es un dato, no un fallo de maquetación: por eso lo explica el pie.
+      figure: {
+        caption: 'Fig. 02 — Trayectoria. El hueco de 2024-2025: máster y formación en el stack actual.',
+        label: 'Línea temporal de 2021 a 2026 con tres etapas: prácticas e ingeniero de software en EFI Cretaprint, y el puesto actual en Robles Sphère, abierto. Entre 2024 y 2026 no hay etapa.',
+        from: '2021-01',
+        to: '2026-12',
+        spans: [
+          { label: 'Prácticas', place: 'EFI', from: '2021-08', to: '2021-12' },
+          { label: 'Ingeniero', place: 'EFI', from: '2021-12', to: '2024-05' },
+          { label: 'Ingeniero IA', place: 'Robles', from: '2026-07', to: '2026-12', open: true },
+        ],
+      },
+
       jobs: [
         {
           role: 'Ingeniero de software — Automatización con IA',
@@ -157,6 +176,11 @@ export const copy = {
           summary:
             'Un sudoku que detecta qué técnica desbloquea tu siguiente movimiento y te la explica. El engine es TypeScript puro, sin dependencias de plataforma: encuentra la técnica y verifica el argumento en servidor. El modelo solo redacta, y nunca ve el tablero.',
           note: 'Caché por patrón y tope de gasto diario: una demo pública no puede comerse la factura.',
+          figure: {
+            caption: 'Fig. 03 — El engine encuentra la técnica, el servidor verifica el argumento y solo entonces el modelo redacta.',
+            label: 'Diagrama: engine de TypeScript, verificación en servidor y API de Claude, encadenados.',
+            nodes: ['Engine TS', 'Verificación', 'Claude API'],
+          },
           links: [
             { label: 'Demo', href: 'https://sudoku-trainer-mu.vercel.app' },
             { label: 'Código', href: 'https://github.com/PauMGDev/SudokuTrainer' },
@@ -168,6 +192,11 @@ export const copy = {
           summary:
             'Planificación semanal de comidas: recetas, control de despensa con caducidades y calendario de menús según lo que hay en casa.',
           note: 'Desarrollado con workflow agéntico: contexto por capas y subagentes especializados en API, datos e interfaz.',
+          figure: {
+            caption: 'Fig. 04 — La misma pila del stack, en pequeño: un solo lenguaje del formulario a la tabla.',
+            label: 'Diagrama: Angular, NestJS y PostgreSQL encadenados.',
+            nodes: ['Angular', 'NestJS', 'PostgreSQL'],
+          },
           links: [
             { label: 'Demo', href: 'https://meal-planner-azure-ten.vercel.app' },
             { label: 'Código', href: 'https://github.com/PauMGDev/MealPlanner' },
@@ -179,6 +208,12 @@ export const copy = {
           summary:
             'Notas de campo sobre cómo hacer que un agente sea fiable para construir software de verdad, con la plantilla de arnés que uso: invariantes escritos, pasos pequeños y un criterio de terminado que se mide.',
           note: 'Esta web es su primera aplicación en público. El repositorio es abierto: el ROADMAP lleva la bitácora de cada decisión y cada fricción, con fecha.',
+          figure: {
+            caption: 'Fig. 05 — El bucle del arnés. Sin la vuelta al plan es una lista de tareas; con ella, un método.',
+            label: 'Diagrama en bucle: plan, build, verify y log, con una flecha de vuelta de log a plan.',
+            nodes: ['Plan', 'Build', 'Verify', 'Log'],
+            loop: true,
+          },
           links: [
             { label: 'Playbook', href: 'https://github.com/PauMGDev/agentic-harness-playbook' },
             { label: 'Esta web', href: 'https://github.com/PauMGDev/paumiquel-v2' },

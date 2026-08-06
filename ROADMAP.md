@@ -376,3 +376,39 @@ queda o la señal que hay que vigilar.
   en versión frontend: no acumules lo que puedes volver a leer. Señal a
   vigilar: cualquier estado nuevo que se escriba dentro de un callback en vez
   de calcularse en una función que se pueda llamar en cualquier momento.
+
+- 2026-08-06 (F3): las figuras no se dibujan en la plantilla. `figures.ts`
+  calcula el modelo —listas de trazos y de rótulos— y un único componente
+  `app-figure` lo pinta, así que una figura nueva es un constructor, no otro
+  bloque de markup. El trazo de cuaderno sale de lados combados con `Q` y
+  esquinas descuadradas, con las desviaciones tomadas de una tabla fija: nada
+  de `Math.random`, porque un dibujo que cambia entre el HTML prerenderizado y
+  la hidratación es un parpadeo. Tres decisiones que costaron una pasada cada
+  una. Las puntas de flecha se dibujan como trazo y no como `marker`: cinco
+  figuras en la misma página con el mismo `id` de marker son cinco `id`
+  repetidos en el documento. Cada figura tiene dos versiones, en fila y en
+  columna, porque escalar la ancha a 375px deja los rótulos en 7px, que no es
+  legible sino decorativo. Y ninguna se pinta por encima de 1:1 (`max-width`
+  en las unidades de su propio viewBox), o el rótulo en mono acabaría más
+  grande que el cuerpo de la página. Regla que queda: una figura es datos más
+  un renderizador, no markup; si hay que copiar y pegar un `<svg>`, falta una
+  abstracción. Señal a vigilar: el case study de F4 trae sus propias figuras,
+  y es donde se verá si los constructores actuales dan de sí o hay que añadir
+  uno nuevo.
+
+- 2026-08-06 (F3): diagnóstico del parpadeo en blanco al scrollear rápido.
+  No hay causa en el código: no existen animaciones de revelado (nada oculto
+  por defecto a la espera de un observador), ni `content-visibility`, ni
+  ninguna otra optimización de rendering; lo único que se oculta con JS es el
+  índice lateral, y el contenido no depende de él. Reproducción: 118 fotogramas
+  capturados por screencast durante un scroll violento con la CPU frenada 6x,
+  de los que uno sale casi sin tinta (0,26% de píxeles con tinta frente a un
+  3,3% de media). Ese mismo fotograma aparece igual con el grano de papel
+  desactivado (0,24%), así que la capa de grano —el único candidato de nuestro
+  lado— queda descartada: es rasterizado del compositor que no llega a tiempo
+  al área nueva, no markup ausente. Se atribuye a la captura y a la máquina, y
+  no se toca nada. Regla que queda: antes de arreglar un síntoma visual, un
+  A/B con el sospechoso desactivado; si el síntoma no se mueve, el sospechoso
+  no era. Señal a vigilar: si reaparece en máquina normal y sin frenar la CPU,
+  el siguiente sospechoso es el tamaño de la capa del grano, y la salida sería
+  volverla a fijar al viewport.

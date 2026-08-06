@@ -59,26 +59,9 @@
       <dd class="secondary">{{ stack.secondary.items.join(' · ') }}</dd>
     </dl>
 
-    <figure class="flow">
-      <svg viewBox="0 0 720 190" role="img" [attr.aria-label]="stack.figure.caption">
-        @for (node of stack.figure.nodes; track node; let i = $index) {
-          <g [attr.transform]="'translate(' + i * 180 + ' 0)'">
-            <rect x="4" y="18" width="150" height="52" rx="2" />
-            <text x="79" y="49">{{ node }}</text>
-          </g>
-          @if (i < stack.figure.nodes.length - 1) {
-            <path [attr.d]="'M' + (i * 180 + 156) + ' 44 h20'" marker-end="url(#tip)" />
-          }
-        }
-        <path d="M439 70 v46 h-80 v18" stroke-dasharray="4 4" marker-end="url(#tip)" />
-        <rect x="284" y="134" width="150" height="46" rx="2" />
-        <text x="359" y="161">{{ stack.figure.aside }}</text>
-        <defs>
-          <marker id="tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M0 0 L8 4 L0 8 z" />
-          </marker>
-        </defs>
-      </svg>
+    <figure class="figure">
+      <app-figure class="wide" [model]="flowFigure.wide" [label]="stack.figure.label" />
+      <app-figure class="tall" [model]="flowFigure.tall" [label]="stack.figure.label" />
       <figcaption>{{ stack.figure.caption }}</figcaption>
     </figure>
   </section>
@@ -86,6 +69,12 @@
   <section class="section" id="experiencia">
     <h2 class="section-head"><span class="num">{{ experience.number }}</span> {{ experience.title }}</h2>
     <p class="section-lead">{{ experience.lead }}</p>
+    <figure class="figure">
+      <app-figure class="wide" [model]="pathFigure.wide" [label]="experience.figure.label" />
+      <app-figure class="tall" [model]="pathFigure.tall" [label]="experience.figure.label" />
+      <figcaption>{{ experience.figure.caption }}</figcaption>
+    </figure>
+
     @for (job of experience.jobs; track job.company + job.period) {
       <article class="entry">
         <h3 class="entry-title">{{ job.role }}</h3>
@@ -102,11 +91,16 @@
   <section class="section" id="proyectos">
     <h2 class="section-head"><span class="num">{{ projects.number }}</span> {{ projects.title }}</h2>
     <ul class="cards">
-      @for (project of projects.items; track project.name) {
+      @for (project of projectCards; track project.name) {
         <li class="card project-card">
           <h3 class="card-title">{{ project.name }}</h3>
           <p class="meta-line">{{ project.stack }}</p>
           <p class="card-summary">{{ project.summary }}</p>
+          <figure class="figure figure-card">
+            <app-figure class="wide" [model]="project.diagram.wide" [label]="project.figure.label" />
+            <app-figure class="tall" [model]="project.diagram.tall" [label]="project.figure.label" />
+            <figcaption>{{ project.figure.caption }}</figcaption>
+          </figure>
           <p class="card-note">{{ project.note }}</p>
           <ul class="card-links">
             @for (link of project.links; track link.href) {

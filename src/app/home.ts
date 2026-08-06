@@ -17,6 +17,8 @@ import {
 } from '@lucide/angular';
 
 import { copy } from './content';
+import { Figure } from './figure';
+import { chain, timeline } from './figures';
 import { SITE_URL, applySeo } from './seo';
 
 /** Franja activa del índice: el 40% superior de la pantalla. Un solo número
@@ -33,7 +35,15 @@ const HERO_RULES = 0.35;
   selector: 'app-home',
   templateUrl: './home.html',
   styleUrl: './home.css',
-  imports: [LucideArrowUpRight, LucideCpu, LucideGuitar, LucideMail, LucideMountain, LucideSpade],
+  imports: [
+    Figure,
+    LucideArrowUpRight,
+    LucideCpu,
+    LucideGuitar,
+    LucideMail,
+    LucideMountain,
+    LucideSpade,
+  ],
 })
 export class Home {
   protected readonly index = copy.home.index;
@@ -44,6 +54,50 @@ export class Home {
   protected readonly projects = copy.home.projects;
   protected readonly appendix = copy.home.appendix;
   protected readonly contact = copy.home.contact;
+
+  /** Cada figura en sus dos versiones: en fila cuando hay hoja, en columna
+   *  cuando no. La alternativa apilada es la que hace legible un diagrama de
+   *  cuatro cajas en 375px; escalar la ancha deja el rótulo en 7px. Se calcula
+   *  una vez, al construir, y así sale entera en el HTML prerenderizado. */
+  protected readonly flowFigure = {
+    wide: chain(this.stack.figure.nodes, {
+      aside: { of: 2, label: this.stack.figure.aside },
+    }),
+    tall: chain(this.stack.figure.nodes, {
+      stacked: true,
+      aside: { of: 2, label: this.stack.figure.aside },
+    }),
+  };
+
+  protected readonly pathFigure = {
+    wide: timeline(
+      this.experience.figure.spans,
+      this.experience.figure.from,
+      this.experience.figure.to,
+    ),
+    tall: timeline(
+      this.experience.figure.spans,
+      this.experience.figure.from,
+      this.experience.figure.to,
+      { stacked: true },
+    ),
+  };
+
+  protected readonly projectCards = this.projects.items.map((item) => ({
+    ...item,
+    diagram: {
+      wide: chain(item.figure.nodes, {
+        loop: 'loop' in item.figure,
+        boxWidth: 120,
+        seed: item.name.length,
+      }),
+      tall: chain(item.figure.nodes, {
+        stacked: true,
+        loop: 'loop' in item.figure,
+        seed: item.name.length,
+      }),
+    },
+  }));
 
   /** Sección visible. Vacía mientras se está en el hero: marcar "stack" antes
    *  de llegar a stack es peor que no marcar nada. */

@@ -191,7 +191,8 @@
   /* Las entradas traen su propia columna de margen (empresa, periodo) y el
      bento se lee a lo ancho: los dos cruzan la hoja entera. */
   .section > .entry,
-  .section > .cards {
+  .section > .cards,
+  .section > .figure {
     grid-column: 1 / -1;
   }
 
@@ -224,51 +225,46 @@
   margin: 0 0 var(--space-3);
 }
 
-/* Fig. 01: el diagrama se dibuja con los tokens, no con una imagen. Papel,
-   filete y mono, igual que el resto de la hoja. */
-.flow {
+/* Figuras: dibujadas con los tokens, no con imágenes, y dentro del flujo de
+   lectura con su pie (docs/DESIGN.md → Figuras). */
+.figure {
   margin: var(--space-8) 0 0;
   max-width: none;
 }
 
-.flow svg {
-  width: 100%;
-  height: auto;
+/* Dos versiones del mismo dibujo, una en fila y otra en columna. Escalar la
+   ancha hasta 375px deja los rótulos en 7px: eso no es legible, es un dibujo
+   de adorno. La estrecha es la alternativa apilada que pide la dirección. */
+.figure .wide {
+  display: none;
 }
 
-.flow rect {
-  fill: var(--color-paper-deep);
-  stroke: var(--color-rule-strong);
-  stroke-width: 1;
+@media (min-width: 48rem) {
+  .figure .wide {
+    display: block;
+  }
+
+  .figure .tall {
+    display: none;
+  }
 }
 
-.flow text {
-  fill: var(--color-ink);
-  font-family: var(--font-mono);
-  font-size: 15px;
-  text-anchor: middle;
-}
-
-/* Las líneas son líneas: con fill heredado, el trazo discontinuo se cerraba
-   sobre sí mismo y salía un manchón. La punta de flecha sí se rellena. */
-.flow path {
-  fill: none;
-  stroke: var(--color-ink-soft);
-  stroke-width: 1.25;
-}
-
-.flow marker path {
-  fill: var(--color-ink-soft);
-  stroke: none;
-}
-
-.flow figcaption {
+.figure figcaption {
   max-width: var(--measure);
   margin-top: var(--space-3);
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   line-height: var(--leading-snug);
   color: var(--color-ink-soft);
+}
+
+/* En la ficha de proyecto la figura acompaña al resumen: entra con menos aire
+   y su pie no vuelve a contar lo que ya dice el resumen. */
+.figure-card {
+  margin-top: var(--space-4);
+  /* Sobre la cartulina de la ficha, las cajas en cartulina no se veían: aquí
+     el diagrama se dibuja en papel. */
+  --figure-fill: var(--color-paper);
 }
 
 /* Lo secundario se lee como secundario: mono pequeña, no cuerpo. */
