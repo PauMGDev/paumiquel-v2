@@ -100,6 +100,59 @@ hr {
   background: var(--color-rule-strong);
 }
 
+/* --- Índice ---------------------------------------------------------------
+   Pestañas de cuaderno: fuera de la hoja, pegadas al scroll, marcando la
+   sección en la que estás. Solo aparece cuando hay margen real que ocupar;
+   por debajo de eso sería un estorbo, y los enlaces ya viven en el HTML. */
+.index {
+  display: none;
+}
+
+@media (min-width: 80rem) {
+  .index {
+    display: block;
+    position: fixed;
+    top: 50%;
+    left: var(--space-6);
+    translate: 0 -50%;
+    z-index: 1;
+  }
+
+  .index ol {
+    display: grid;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+  }
+
+  .index a {
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .index a span {
+    /* El número siempre; el rótulo, cuando esa sección es la que se lee. */
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+
+  .index a:hover,
+  .index a:focus-visible,
+  .index .is-active {
+    color: var(--color-ink);
+  }
+
+  .index a:hover span,
+  .index a:focus-visible span,
+  .index .is-active span {
+    opacity: 1;
+  }
+}
+
 /* Sección numerada: el filete de arriba es la retícula visible de la
    dirección, y la numeración es del documento, no de cada componente. */
 .section {

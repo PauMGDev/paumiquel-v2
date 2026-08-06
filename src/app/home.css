@@ -3,15 +3,40 @@
   padding-inline: var(--page-gutter);
 }
 
-/* El primer viewport tiene que caber entero: min-height nunca corta —hace
-   crecer, no recortar— y el contenido se queda por debajo del alto útil de
-   un iPhone SE. Ver la enmienda de dirección en docs/DESIGN.md. */
+/* El hero ocupa la pantalla y reparte su contenido en ella: marca arriba,
+   nombre y entradilla al centro, enlaces y sello abajo. Centrarlo dejaba dos
+   cinturones de aire muerto y aun así la sección 01 asomaba por debajo.
+   min-height nunca corta —hace crecer, no recortar—, así que el primer
+   viewport sigue siendo autocontenido. Ver la enmienda en docs/DESIGN.md. */
 .hero {
   display: grid;
-  gap: var(--space-4);
-  min-height: 76svh;
-  align-content: center;
-  padding: var(--space-12) 0 var(--space-16) var(--margin-rule-offset);
+  gap: var(--space-8);
+  min-height: 92svh;
+  align-content: space-between;
+  padding: var(--space-8) 0 var(--space-12) var(--margin-rule-offset);
+}
+
+/* Tres bloques repartidos en la altura: marca arriba, entradilla en el
+   centro óptico, enlaces y sello abajo. Con dos bloques quedaba un solo
+   hueco enorme en medio; con tres, el aire se reparte y se lee compuesto. */
+.hero-main {
+  display: grid;
+  gap: var(--space-2);
+  padding-top: var(--space-12);
+}
+
+.hero-main .eyebrow {
+  margin-bottom: var(--space-4);
+}
+
+/* El sello deja de flotar en el margen: se ancla al pie del hero, en la misma
+   línea que los enlaces. */
+.hero-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
 }
 
 .eyebrow {
@@ -57,6 +82,12 @@
   margin: 0 0 var(--space-8);
 }
 
+/* Las secciones necesitaban leerse como capítulos, no como bloques pegados
+   uno detrás de otro: más aire arriba y numeración con más presencia. */
+.section {
+  padding-top: var(--space-16);
+}
+
 /* En desktop la entradilla se va al margen derecho como nota: es el mismo
    tratamiento que la guía de /tokens, y es lo que llena la mitad de la hoja
    que antes estaba vacía. En móvil no hay margen, así que se queda arriba
@@ -78,7 +109,7 @@
   /* Las entradas traen su propia columna de margen (empresa, periodo) y el
      bento se lee a lo ancho: los dos cruzan la hoja entera. */
   .section > .entry,
-  .section > .bento {
+  .section > .cards {
     grid-column: 1 / -1;
   }
 
@@ -99,10 +130,24 @@
   gap: var(--space-1) var(--space-6);
   margin: 0;
   max-width: var(--measure);
+  font-size: var(--text-lg);
+}
+
+.groups dt {
+  padding-top: var(--space-4);
+  border-top: var(--rule-width) solid var(--color-rule);
 }
 
 .groups dd {
   margin: 0 0 var(--space-4);
+}
+
+/* Lo secundario se lee como secundario: mono pequeña, no cuerpo. */
+.groups .secondary {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: var(--color-ink-soft);
 }
 
 .entry {
@@ -146,8 +191,6 @@
    Ficha de cuaderno: papel, filete de 1px, etiqueta en mono. Sin sombra ni
    elevación — el papel no flota. */
 
-/* Las fichas se quedan en la columna de lectura: una caja que llega más lejos
-   que el texto que contiene rompe la retícula de la página. */
 .cards {
   display: grid;
   gap: var(--space-6);
@@ -205,21 +248,8 @@
 }
 
 @media (min-width: 64rem) {
-  /* El sello sube al margen derecho, que es donde vive la anotación. */
-  .hero {
-    grid-template-columns: minmax(0, var(--measure)) minmax(0, 18rem);
-    column-gap: var(--space-12);
-    justify-items: start;
-  }
-
-  .hero > * {
-    grid-column: 1;
-  }
-
-  .hero > .stamp {
-    grid-column: 2;
-    grid-row: 1 / span 3;
-    align-self: start;
+  .hero-foot {
+    max-width: calc(var(--measure) + 18rem + var(--space-12));
   }
 
   /* Empresa y periodo salen al margen, alineados con el puesto que anotan. */
@@ -245,11 +275,46 @@
     max-width: none;
   }
 
-  /* El bento usa el ancho completo de la hoja; las fichas de proyecto no,
-     porque su texto es de lectura larga y el bento es de vistazo. */
+  /* Todas las fichas cruzan la hoja: dos anchos distintos de ficha en la
+     misma página se leían como dos sistemas. El bento va en tres columnas y
+     la ficha de proyecto reparte su texto y sus datos en dos. */
+  .cards {
+    max-width: none;
+  }
+
   .bento {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    max-width: none;
+  }
+
+  .project-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 14rem);
+    column-gap: var(--space-8);
+    align-items: start;
+  }
+
+  .project-card > * {
+    grid-column: 1;
+  }
+
+  .project-card > .meta-line,
+  .project-card > .card-note,
+  .project-card > .card-links {
+    grid-column: 2;
+  }
+
+  .project-card > .meta-line {
+    grid-row: 1;
+    padding-top: 0.4em;
+  }
+
+  .project-card > .card-note {
+    grid-row: 2;
+    margin-top: var(--space-4);
+  }
+
+  .project-card > .card-links {
+    grid-row: 3;
   }
 
   .groups dt {

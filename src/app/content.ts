@@ -4,6 +4,18 @@
  */
 export const copy = {
   home: {
+    index: {
+      label: 'Índice',
+      items: [
+        { number: '01', title: 'Stack', id: 'stack' },
+        { number: '02', title: 'Experiencia', id: 'experiencia' },
+        { number: '03', title: 'Proyectos', id: 'proyectos' },
+        { number: '04', title: 'Formación', id: 'formacion' },
+        { number: '05', title: 'Apéndice A', id: 'apendice' },
+        { number: '06', title: 'Contacto', id: 'contacto' },
+      ],
+    },
+
     // El stack completo y el bloque de IA de la v1 no viven aquí: bajan a las
     // secciones de 2.2. El primer viewport tiene que caber entero.
     hero: {
@@ -27,6 +39,10 @@ export const copy = {
         { label: 'IA aplicada', items: ['Claude API', 'MCP', 'Claude Code'] },
         { label: 'Calidad', items: ['Vitest', 'TDD', 'Strict mode'] },
       ],
+      secondary: {
+        label: 'También he trabajado con',
+        items: ['C#', 'ASP.NET', 'Blazor', 'SQL Server', 'Unity', 'MongoDB', 'Express', 'Next.js'],
+      },
     },
 
     experience: {
