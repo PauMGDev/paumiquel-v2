@@ -1,12 +1,4 @@
-import {
-  Component,
-  DestroyRef,
-  ElementRef,
-  afterNextRender,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, DestroyRef, ElementRef, afterNextRender, inject, signal } from '@angular/core';
 import {
   LucideArrowUpRight,
   LucideCpu,
@@ -109,9 +101,6 @@ export class Home {
    *  JS se ve siempre, que es el fallo correcto. */
   protected readonly heroInView = signal(false);
 
-  private readonly taglineIndex = signal(0);
-  protected readonly tagline = computed(() => this.hero.taglines[this.taglineIndex()]);
-
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -137,7 +126,6 @@ export class Home {
     afterNextRender(() => {
       this.trackSections();
       this.watchHero();
-      this.rotateTagline();
     });
   }
 
@@ -219,13 +207,4 @@ export class Home {
     this.destroyRef.onDestroy(() => observer.disconnect());
   }
 
-  private rotateTagline(): void {
-    // Quien pide menos movimiento se queda con la primera frase y ya está.
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const timer = setInterval(() => {
-      this.taglineIndex.update((i) => (i + 1) % this.hero.taglines.length);
-    }, 4500);
-    this.destroyRef.onDestroy(() => clearInterval(timer));
-  }
 }

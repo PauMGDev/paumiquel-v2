@@ -33,15 +33,11 @@ export const copy = {
       // sección, no un adorno: si algo indica que hay más abajo, que lleve.
       cue: { label: '↓ 01 — Stack', href: '#stack' },
 
-      // Frases propuestas por el agente para que Pau las edite o las cambie
-      // enteras. Rotan bajo el rol; con prefers-reduced-motion se queda la
-      // primera y no se mueve nada.
-      taglines: [
-        'La IA no arregla una arquitectura mala.',
-        'Escribo el test antes de que me lo pidan.',
-        'Prefiero borrar código a escribirlo.',
-        'Desmonto cosas para entender cómo están hechas.',
-      ],
+      // Statement del hero: una frase, fija y subrayada a mano. Rotaba entre
+      // cuatro; una frase que se va sola no es una declaración, es un carrusel,
+      // y encima obligaba a que el subrayado midiera cuatro anchos distintos.
+      // Las otras tres están en el historial si alguna vez se cambia esta.
+      statement: 'La IA no arregla una arquitectura mala.',
 
       // Ficha de datos. Solo lo que se puede defender hoy: ubicación e
       // idiomas entran cuando Pau pase los valores.

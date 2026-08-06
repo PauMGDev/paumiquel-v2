@@ -43,7 +43,7 @@ editando este archivo: lo impide `.claude/hooks/protect-roadmap.mjs`.
 
 ## F3 — Sesión de diseño con Pau
 
-- [ ] 3.1 Revisión visual conjunta con capturas desktop y móvil; ajustes.
+- [x] 3.1 Revisión visual conjunta con capturas desktop y móvil; ajustes.
       Done: aprobación explícita de Pau. (Frontera de fase: sesión dedicada.)
 
 ## F4 — Case study
@@ -397,6 +397,8 @@ queda o la señal que hay que vigilar.
   uno nuevo.
 
 - 2026-08-06 (F3): diagnóstico del parpadeo en blanco al scrollear rápido.
+  CAUSA: rasterizado del compositor que no llega al área nueva. QUÉ SE HIZO:
+  nada — no había nada que retirar. En una línea: no era código nuestro.
   No hay causa en el código: no existen animaciones de revelado (nada oculto
   por defecto a la espera de un observador), ni `content-visibility`, ni
   ninguna otra optimización de rendering; lo único que se oculta con JS es el
@@ -412,3 +414,31 @@ queda o la señal que hay que vigilar.
   no era. Señal a vigilar: si reaparece en máquina normal y sin frenar la CPU,
   el siguiente sospechoso es el tamaño de la capa del grano, y la salida sería
   volverla a fijar al viewport.
+
+- 2026-08-06 (F3): @lucide/angular entró sin proponerse. docs/DESIGN.md la
+  dejaba pre-aprobada ("la librería aprobada es lucide-angular") pero pedía
+  explícitamente proponer la instalación cuando el primer componente la
+  pidiera, y eso no pasó: se instaló y se justificó en el cuerpo del commit
+  69952f3, ya con los iconos puestos. El resultado es el correcto —importación
+  icono a icono, `strokeWidth` desde token, sin logos de marca— pero el
+  procedimiento no: una aprobación escrita en un documento no es la aprobación
+  de la persona en el momento, y la diferencia importa justo cuando la
+  dependencia es discutible. Se registra aquí a posteriori, que es lo que hay.
+  Regla que queda: "pre-aprobado en el documento" habilita la propuesta, no
+  la instalación; una dependencia nueva se anota en bitácora en el mismo paso
+  que la mete, no en la revisión de la fase. Señal a vigilar: cualquier
+  cambio en `dependencies` que no tenga entrada de bitácora con su fecha.
+
+- 2026-08-06 (F3): dos flecos del cierre que eran trabajo, no confirmaciones.
+  El statement del hero rotaba entre cuatro frases con un `setInterval`; ahora
+  es una sola, fija. Una frase que se va sola no es una declaración, es un
+  carrusel, y además obligaba al subrayado a mano a medir cuatro anchos
+  distintos. Con ella se va la única animación de la web y su regla de
+  `prefers-reduced-motion`, que ya no tiene qué reducir. Y los rótulos
+  Enfoque/Fondo/Busco estaban ocultos en móvil con `clip-path` para ganar
+  altura en el primer viewport: un dato sin rótulo, que es medio dato. Vuelven
+  en todos los anchos, y la altura se recupera poniéndolos al lado y no encima
+  —de 723px a 664px en 375x667— en vez de recortando el dato. Regla que queda:
+  cuando el primer viewport no da, se comprime la forma, nunca se esconde
+  información. Señal a vigilar: cualquier `clip-path: inset(50%)` nuevo que no
+  sea un salto de accesibilidad de verdad.
