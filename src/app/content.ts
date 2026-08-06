@@ -69,8 +69,10 @@ export const copy = {
     },
 
     education: {
-      number: '03',
-      title: 'Formación',
+      number: '04',
+      title: 'Formación y certificación',
+      // Anotado: la certificación es el único ítem con verificación, así que
+      // el tipo la declara opcional en lugar de inventar campos vacíos.
       items: [
         {
           name: 'Máster en Desarrollo Fullstack',
@@ -84,11 +86,24 @@ export const copy = {
           period: '4 cursos, sin titular',
           detail: 'Unity 2D y 3D con C#, arte y modelado 3D. De ahí viene la costumbre de perseguir los milisegundos.',
         },
-      ],
+        {
+          name: 'Claude Code in Action',
+          school: 'Anthropic',
+          period: 'certificación',
+          detail: 'Curso oficial sobre desarrollo con agentes: contexto, herramientas y flujo de trabajo.',
+          verify: { label: 'Verificar', href: 'https://verify.skilljar.com/c/7nzxnt37mbfi' },
+        },
+      ] as ReadonlyArray<{
+        name: string;
+        school: string;
+        period: string;
+        detail: string;
+        verify?: { label: string; href: string };
+      }>,
     },
 
     projects: {
-      number: '05',
+      number: '03',
       title: 'Proyectos',
       items: [
         {
@@ -127,16 +142,9 @@ export const copy = {
       ],
     },
 
-    certification: {
-      number: '04',
-      title: 'Certificación',
-      name: 'Claude Code in Action',
-      issuer: 'Anthropic',
-      verify: { label: 'Verificar', href: 'https://verify.skilljar.com/c/7nzxnt37mbfi' },
-    },
 
     appendix: {
-      number: '06',
+      number: '05',
       title: 'Apéndice A — Fuera del código',
       note: 'Cinco líneas para que la conversación no empiece por el currículum.',
       items: [
@@ -169,7 +177,7 @@ export const copy = {
     },
 
     contact: {
-      number: '07',
+      number: '06',
       title: 'Contacto',
       lead: 'Abierto a nuevas oportunidades y colaboraciones. El correo es la vía más rápida.',
       email: 'paumgdev@gmail.com',

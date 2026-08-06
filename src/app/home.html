@@ -42,30 +42,6 @@
     }
   </section>
 
-  <section class="section" id="formacion">
-    <h2 class="section-head"><span class="num">{{ education.number }}</span> {{ education.title }}</h2>
-    @for (item of education.items; track item.name) {
-      <article class="entry">
-        <h3 class="entry-title">{{ item.name }}</h3>
-        <p class="meta-line">{{ item.school }}<span>{{ item.period }}</span></p>
-        <p class="entry-detail">{{ item.detail }}</p>
-      </article>
-    }
-  </section>
-
-  <section class="section" id="certificacion">
-    <h2 class="section-head"><span class="num">{{ certification.number }}</span> {{ certification.title }}</h2>
-    <article class="entry">
-      <h3 class="entry-title">{{ certification.name }}</h3>
-      <p class="meta-line">{{ certification.issuer }}</p>
-      <p class="entry-detail">
-        <a [href]="certification.verify.href" rel="noopener" target="_blank">
-          {{ certification.verify.label }}
-        </a>
-      </p>
-    </article>
-  </section>
-
   <section class="section" id="proyectos">
     <h2 class="section-head"><span class="num">{{ projects.number }}</span> {{ projects.title }}</h2>
     <ul class="cards">
@@ -83,6 +59,22 @@
         </li>
       }
     </ul>
+  </section>
+
+  <section class="section" id="formacion">
+    <h2 class="section-head"><span class="num">{{ education.number }}</span> {{ education.title }}</h2>
+    @for (item of education.items; track item.name) {
+      <article class="entry">
+        <h3 class="entry-title">{{ item.name }}</h3>
+        <p class="meta-line">{{ item.school }}<span>{{ item.period }}</span></p>
+        <p class="entry-detail">{{ item.detail }}</p>
+        @if (item.verify) {
+          <p class="entry-detail">
+            <a [href]="item.verify.href" rel="noopener" target="_blank">{{ item.verify.label }}</a>
+          </p>
+        }
+      </article>
+    }
   </section>
 
   <section class="section" id="apendice">
