@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# /tokens se rastrea pero no se indexa: lleva noindex en su HTML. Bloquearlo
+# aquí impediría leer esa etiqueta, que es justo lo contrario de lo que se
+# quiere.
+
+Sitemap: https://paumiquel.com/sitemap.xml

@@ -1,0 +1,117 @@
+<!doctype html>
+<!--
+  Plantilla de la imagen OG de la home. Se renderiza a mano a 1200x630 con
+  Chromium headless y el PNG resultante se commitea en public/og/home.png.
+  No entra en el build: una imagen que no cambia no necesita pipeline.
+
+  Los valores vienen de src/tokens.css. Si cambian ahí, esta plantilla se
+  queda vieja: es el precio de no montar un generador, y por eso lo dice.
+-->
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: 'Fraunces';
+        src: url('../../public/fonts/fraunces-variable.woff2') format('woff2-variations');
+        font-weight: 300 700;
+      }
+      @font-face {
+        font-family: 'IBM Plex Mono';
+        src: url('../../public/fonts/ibm-plex-mono-400.woff2') format('woff2');
+        font-weight: 400;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        width: 1200px;
+        height: 630px;
+        padding: 72px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: #faf9f6;
+        color: #1c1b1a;
+        font-family: 'Fraunces', serif;
+        font-optical-sizing: auto;
+      }
+
+      /* La línea de margen del cuaderno, igual que en el sitio. */
+      body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 44px;
+        width: 1px;
+        background: #c3bdb1;
+      }
+
+      .eyebrow,
+      .stack,
+      .stamp {
+        font-family: 'IBM Plex Mono', monospace;
+        color: #55514b;
+      }
+
+      .eyebrow {
+        font-size: 20px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        font-size: 104px;
+        font-weight: 650;
+        line-height: 1.05;
+        letter-spacing: -0.015em;
+      }
+
+      p.lead {
+        margin-top: 20px;
+        font-size: 40px;
+        line-height: 1.25;
+        color: #55514b;
+        max-width: 900px;
+      }
+
+      .foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 28px;
+        border-top: 1px solid #d8d4cb;
+      }
+
+      .stack {
+        font-size: 22px;
+      }
+
+      .stamp {
+        padding: 10px 18px;
+        border: 2px solid #2f6b4f;
+        border-radius: 2px;
+        color: #2f6b4f;
+        font-size: 20px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        rotate: -2deg;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="eyebrow">paumiquel.com</p>
+    <div>
+      <h1>Pau Miquel</h1>
+      <p class="lead">Full stack en TypeScript, con la capa de IA donde resuelve algo.</p>
+    </div>
+    <div class="foot">
+      <p class="stack">Angular · Node · Postgres · IA aplicada</p>
+      <p class="stamp">disponible</p>
+    </div>
+  </body>
+</html>
