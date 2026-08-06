@@ -17,7 +17,7 @@ editando este archivo: lo impide `.claude/hooks/protect-roadmap.mjs`.
 
 ## F1 — Fundamentos
 
-- [ ] 1.1 Scaffold Angular + SSG + pipeline de deploy con preview URL desde
+- [x] 1.1 Scaffold Angular + SSG + pipeline de deploy con preview URL desde
       el día 1. Done: ruta dummy sirviendo HTML completo en el build,
       Lighthouse base medido y anotado.
 - [ ] 1.2 Sistema de diseño: tokens y tipografía de la dirección elegida,
@@ -125,3 +125,49 @@ queda o la señal que hay que vigilar.
   propia sostienen mejor el escrutinio de un evaluador que cuatro donde una
   va de relleno. Regla que queda: en portfolio, la lista de proyectos se poda,
   no se acumula.
+
+### F1 — Fundamentos
+
+- 2026-08-06 (1.1): el schematic `--ssr` de Angular 22 no da SSG, da SSR:
+  `outputMode: "server"`, un `src/server.ts` con Express y las dependencias
+  que eso arrastra. El invariante de CLAUDE.md es SSG total, así que se pasa
+  a `outputMode: "static"` y se borran el entry de servidor, el bloque `ssr`
+  de angular.json y `express` con sus tipos. El build lo confirma: el output
+  es solo `browser/`, sin bundle de servidor, y el HTML sale con
+  `ng-server-context="ssg"`. Regla que queda: el defecto de un schematic no
+  es una decisión de arquitectura; se compara contra los invariantes antes de
+  commitear. Señal a vigilar: si `dist/` vuelve a tener carpeta `server/`,
+  alguien reintrodujo SSR sin decirlo.
+
+- 2026-08-06 (1.1): fricción de arnés con pnpm 11. Bloquea los scripts de
+  instalación (`esbuild`, `lmdb`, `@parcel/watcher`, `msgpackr-extract`) y
+  `pnpm build` falla antes de compilar. Ni el campo `pnpm.onlyBuiltDependencies`
+  de package.json ni la clave del mismo nombre en `pnpm-workspace.yaml`
+  desbloquean nada en esta versión: lo que funciona es el mapa `allowBuilds`
+  en `pnpm-workspace.yaml`. Se deja anotado porque el mensaje de error apunta
+  a `pnpm approve-builds`, que es interactivo y por tanto inútil en CI y para
+  un agente. Regla que queda: toda dependencia nueva que compile binario se
+  añade a `allowBuilds` en el mismo commit que la instala.
+
+- 2026-08-06 (1.1): las preview URLs quedan detrás de la Vercel Authentication
+  por defecto (302 sin sesión); se decide dejarla puesta. Una preview pública
+  es trabajo a medias indexable, y el sitio es un portfolio: lo que se enseña
+  es producción. Consecuencia medida: la baseline de Lighthouse no se puede
+  tomar sobre la preview, se toma sobre `paumiquel-v2.vercel.app`, y el
+  contenido de las previews se verifica con `vercel curl`, que autentica. La
+  integración git quedó probada de punta a punta: push de rama, deployment de
+  preview `Ready`, marcador prerenderizado presente en su HTML. Regla que
+  queda: verificar una preview es `vercel curl`, no `curl`; un 302 ahí es la
+  protección haciendo su trabajo, no un deploy roto.
+
+- 2026-08-06 (1.1): baseline de Lighthouse sobre producción con la ruta dummy,
+  para tener contra qué comparar cuando entren fuentes, imágenes y contenido.
+  Móvil y desktop dan lo mismo en las cuatro categorías: rendimiento 100,
+  buenas prácticas 100, accesibilidad 94, SEO 82. LCP 0,8s en móvil y 0,4s en
+  desktop, TBT 0ms, CLS 0. Los tres fallos son exactamente el trabajo que ya
+  tiene paso dueño: `meta-description` y `robots-txt` los cierra 1.3, y
+  `landmark-one-main` lo cierra la semántica de F2. Lo que este número mide de
+  verdad es el techo del arnés vacío: 100 de rendimiento con 229kB de bundle y
+  cero contenido es el punto de partida, no un logro. Señal a vigilar: si el
+  rendimiento cae por debajo de 95, el paso que lo tiró es el que lo arregla,
+  no la auditoría final de 5.2.
