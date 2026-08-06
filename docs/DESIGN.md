@@ -33,29 +33,31 @@ técnica bien editada, no de una app.
 
 - FONDO: papel, no pantalla. Blanco cálido roto (candidato: #FAF9F6), tinta
   casi-negra cálida (#1C1B1A). La v2 es CLARA: es la ruptura visible con la
-  v1 y con el default oscuro de la época.
+  v1 y con el default oscuro de la época. Los valores exactos se cierran
+  en 1.2, medidos sobre la página de tokens.
 - ESTRUCTURA VISIBLE: retícula que se nota. Filetes finos (1px, tinta al
   15-20%) separando secciones, márgenes generosos y consistentes, y una
-  posible línea de margen vertical a la izquierda, como en un cuaderno de
-  laboratorio.
+  línea de margen vertical a la izquierda, como en un cuaderno de
+  laboratorio (opcional: se prueba y se decide en 1.2).
 - LENGUAJE DE ANOTACIÓN: secciones numeradas (01, 02...), imágenes con pie
   ("Fig. 03 — Arquitectura del clasificador"), metadatos (fechas, stack,
   estado) en mono pequeña como marginalia. El espíritu de la bitácora,
   hecho estética.
-- ACENTO: UNA tinta de anotación, azul tinta (candidato: #1D4ED8, ajustar
-  sobre papel y medir contraste) para enlaces y acción. Opcional segundo
-  acento ultraescaso: rojo lápiz para 2-3 subrayados en toda la web, máximo.
+- ACENTO: UNA tinta de anotación, azul tinta (candidato: #1D4ED8; el valor
+  final se ajusta sobre el papel y se mide en 1.2) para enlaces y acción.
+  Segundo acento ultraescaso, rojo lápiz: 2-3 subrayados en toda la web como
+  máximo. Se prueba en 1.2; si no gana nada, no entra.
 - DISPONIBILIDAD: como sello o casilla de formulario, no como badge de app
   ("[x] abierto a oportunidades" en mono, o un sello de tinta girado 2°).
 - PERSONA: "Apéndice A — Fuera del código", con formato de apéndice real.
   El chiste estructural ES el tono.
 
-### Tipografía (2 familias, decisión firme tras la página de tokens)
+### Tipografía (2 familias; la pareja se cierra en 1.2)
 
 Recomendación: Fraunces (variable, optical sizing: display con carácter en
 títulos, legible en cuerpo) + IBM Plex Mono (marginalia, etiquetas, figuras:
-herencia ingeniera literal). Alternativas a probar en la página de tokens:
-Newsreader + Space Mono; Source Serif 4 + IBM Plex Mono.
+herencia ingeniera literal). Alternativas que se prueban en la página de
+tokens de 1.2: Newsreader + Space Mono; Source Serif 4 + IBM Plex Mono.
 Regla: subset + variable + font-display swap; presupuesto 2 archivos.
 
 ### Lo que esta dirección PROHÍBE
@@ -102,7 +104,7 @@ ingeniero, pero bonito: estructura con encanto, no paper seco.
 
 SE CONSERVA (migración literal, retoques menores permitidos): hero con la
 jerarquía actual, stack, experiencia (Robles + EFI), certificación,
-proyectos (Sudoku Trainer, MealPlanner, MCP GRF si sigue), formación
+proyectos (Sudoku Trainer, MealPlanner), formación
 (con la fórmula "4 cursos, sin titular"), contacto.
 
 SE AÑADE:
@@ -124,8 +126,12 @@ c) Indicador de disponibilidad visible en el hero (estado, no párrafo).
 d) Case study: /proyectos/clasificador-email (F4): problema, arquitectura
    con diagrama, decisiones, resultados. Sin código propietario.
 
-IDIOMA: ES primario. EN: decisión pendiente (ruta /en prerenderizada con
-hreflang, o aplazado). Si se aplaza, que la estructura de copys no lo impida.
+IDIOMA: ES, único. El inglés queda APLAZADO fuera de la v2: no hay ruta /en
+ni hreflang. La garantía de que se pueda añadir después sin rediseño es el
+invariante que ya existe en CLAUDE.md —todo el contenido textual vive en un
+único módulo de copys— y no hace falta más andamiaje que ese. Se reabre si
+aparece búsqueda de rol internacional; entonces el trabajo es una traducción
+del módulo de copys y una ruta prerenderizada, no una refactorización.
 
 ## Requisitos no funcionales (dones de fase, no deseos)
 
