@@ -66,12 +66,13 @@ export class Home {
       this.experience.figure.spans,
       this.experience.figure.from,
       this.experience.figure.to,
+      { gapLabel: this.experience.figure.gapLabel },
     ),
     tall: timeline(
       this.experience.figure.spans,
       this.experience.figure.from,
       this.experience.figure.to,
-      { stacked: true },
+      { stacked: true, gapLabel: this.experience.figure.gapLabel },
     ),
   };
 

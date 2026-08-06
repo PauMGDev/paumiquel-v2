@@ -69,11 +69,15 @@ import type { FigureModel } from './figures';
       stroke-linejoin: round;
     }
 
-    /* La capa de IA no es un paso de la cadena: es una llamada. */
-    .aside-link {
+    /* La capa de IA no es un paso de la cadena: es una llamada. Y el hueco
+       de la línea temporal no es una etapa: es su ausencia, anotada. Los dos
+       hablan en discontinua. */
+    .aside-link,
+    .gap {
       fill: none;
       stroke: var(--color-ink-soft);
       stroke-width: 1.2;
+      stroke-linecap: round;
       stroke-dasharray: 4 4;
     }
 

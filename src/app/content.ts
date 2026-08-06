@@ -80,10 +80,13 @@ export const copy = {
 
       // Las fechas van aquí en formato máquina porque la figura las dibuja;
       // las de los puestos siguen escritas para leerse. El hueco entre barras
-      // es un dato, no un fallo de maquetación: por eso lo explica el pie.
+      // es un dato, no un fallo de maquetación: por eso la figura lo anota
+      // (gapLabel) y el pie lo explica. En móvil el hueco domina la hoja y
+      // una anotación que solo vive en el pie llega tarde.
       figure: {
         caption: 'Fig. 02 — Trayectoria. El hueco de 2024-2025: máster y formación en el stack actual.',
-        label: 'Línea temporal de 2021 a 2026 con tres etapas: prácticas e ingeniero de software en EFI Cretaprint, y el puesto actual en Robles Sphère, abierto. Entre 2024 y 2026 no hay etapa.',
+        label: 'Línea temporal de 2021 a 2026 con tres etapas: prácticas e ingeniero de software en EFI Cretaprint, y el puesto actual en Robles Sphère, abierto. El hueco de 2024 a 2026 está anotado en la propia figura como máster y formación.',
+        gapLabel: 'máster · formación',
         from: '2021-01',
         to: '2026-12',
         spans: [

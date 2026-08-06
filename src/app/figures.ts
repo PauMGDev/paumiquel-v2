@@ -22,7 +22,7 @@ const n = (value: number): number => Math.round(value * 10) / 10;
 
 export interface FigurePath {
   d: string;
-  kind: 'box' | 'link' | 'aside-link' | 'axis' | 'bar' | 'tip';
+  kind: 'box' | 'link' | 'aside-link' | 'axis' | 'bar' | 'tip' | 'gap';
 }
 
 export interface FigureText {
@@ -45,10 +45,15 @@ export interface FigureModel {
 
 /** Caja de cuaderno: cuatro lados combados y cuatro esquinas descuadradas.
  *  Con `Q` en vez de `L`, que un rectángulo recto es la caja de diagrama
- *  corporativo que esta dirección viene a quitar. */
+ *  corporativo que esta dirección viene a quitar.
+ *
+ *  El descuadre se escala al tamaño de la caja: el temblor que da carácter a
+ *  una caja de 150 unidades deja sin forma a una barra de 8. Por debajo de 24
+ *  unidades de lado menor, el trazo se calma en proporción. */
 function box(x: number, y: number, w: number, h: number, seed: number): string {
-  const corner = (i: number) => jitter(seed + i);
-  const bow = (i: number) => jitter(seed + i) * 0.8;
+  const scale = Math.min(1, Math.min(w, h) / 24);
+  const corner = (i: number) => jitter(seed + i) * scale;
+  const bow = (i: number) => jitter(seed + i) * 0.8 * scale;
 
   const ax = n(x + corner(0));
   const ay = n(y + corner(1));
@@ -232,15 +237,32 @@ const months = (iso: string): number => {
   return year * 12 + (month - 1);
 };
 
+/** Ancho de avance del mono de figura a 12px, para partir la línea del hueco
+ *  alrededor de su rótulo sin medir texto en el servidor. */
+const MONO_ADVANCE = 7.2;
+
+/** Meses a partir de los cuales un hueco entre etapas se anota. Por debajo,
+ *  el hueco es un cambio de trabajo, no un periodo con nombre. */
+const GAP_MONTHS = 6;
+
+/** Fila de la línea temporal: una etapa con barra, o un hueco anotado. */
+type TimelineRow =
+  | { readonly kind: 'span'; readonly span: Span }
+  | { readonly kind: 'gap'; readonly from: string; readonly to: string };
+
 /** Línea temporal: eje con años y una barra por etapa. Los huecos entre
- *  barras son parte del dato, no un fallo de maquetación. */
+ *  barras son parte del dato, no un fallo de maquetación: con `gapLabel`,
+ *  el hueco ocupa su propia fila cronológica y se anota dentro de la figura
+ *  —ticks en sus fechas y trazo discontinuo— para que también se lea así
+ *  cuando el hueco domina la hoja. El pie complementa; no carga él solo. */
 export function timeline(
   spans: readonly Span[],
   from: string,
   to: string,
-  options: { readonly stacked?: boolean } = {},
+  options: { readonly stacked?: boolean; readonly gapLabel?: string } = {},
 ): FigureModel {
   const stacked = options.stacked ?? false;
+  const gapLabel = options.gapLabel;
   const paths: FigurePath[] = [];
   const texts: FigureText[] = [];
 
@@ -249,11 +271,23 @@ export function timeline(
   const firstYear = Number(from.slice(0, 4));
   const lastYear = Number(to.slice(0, 4));
 
+  // Las filas van en orden cronológico, y el hueco es una fila más: la etapa
+  // sin barra. Insertarlo como fila le da el mismo derecho a hoja que a las
+  // demás, que es exactamente lo que el dato pide.
+  const rows: TimelineRow[] = [];
+  spans.forEach((span, i) => {
+    const prev = spans[i - 1];
+    if (gapLabel && prev && months(span.from) - months(prev.to) >= GAP_MONTHS) {
+      rows.push({ kind: 'gap', from: prev.to, to: span.from });
+    }
+    rows.push({ kind: 'span', span });
+  });
+
   if (!stacked) {
     const x0 = 6;
     // El eje no llega al borde: la etapa abierta necesita sitio para su punta.
     const x1 = 700;
-    const axisY = 96;
+    const axisY = 30 + rows.length * 18 + 12;
     const at = (iso: string) => n(x0 + ((months(iso) - start) / total) * (x1 - x0));
 
     paths.push({ d: line(x0, axisY, x1, axisY, 3), kind: 'axis' });
@@ -264,10 +298,29 @@ export function timeline(
       texts.push({ x, y: axisY + 20, text: String(year), kind: 'year' });
     }
 
-    spans.forEach((span, i) => {
+    rows.forEach((row, i) => {
+      const y = 30 + i * 18;
+
+      if (row.kind === 'gap') {
+        const left = at(row.from);
+        const right = at(row.to);
+        const mid = (left + right) / 2;
+        // El rótulo interrumpe el trazo, como una cota: tick en cada fecha,
+        // discontinua hasta el texto y de vuelta.
+        const textHalf = (gapLabel!.length * MONO_ADVANCE) / 2 + 8;
+        paths.push({ d: line(left, y + 1, left, y + 11, 17 + i), kind: 'axis' });
+        paths.push({ d: line(right, y + 1, right, y + 11, 19 + i), kind: 'axis' });
+        if (mid - textHalf - left > 6) {
+          paths.push({ d: `M${n(left + 3)} ${n(y + 6)} H${n(mid - textHalf)}`, kind: 'gap' });
+          paths.push({ d: `M${n(mid + textHalf)} ${n(y + 6)} H${n(right - 3)}`, kind: 'gap' });
+        }
+        texts.push({ x: n(mid), y: n(y + 10), text: gapLabel!, kind: 'label' });
+        return;
+      }
+
+      const span = row.span;
       const left = at(span.from);
       const right = at(span.to);
-      const y = 30 + i * 18;
       paths.push({ d: box(left, y, Math.max(right - left, 10), 12, 11 + i * 5), kind: 'bar' });
       // La etapa que sigue abierta no se cierra con un borde: sigue.
       if (span.open) paths.push(tip(right + 9, y + 6, 'right'));
@@ -283,7 +336,7 @@ export function timeline(
       });
     });
 
-    return { width: 720, height: 124, paths, texts };
+    return { width: 720, height: n(axisY + 28), paths, texts };
   }
 
   // Apilada: el eje se pone de pie y las etapas caen a su derecha.
@@ -301,12 +354,32 @@ export function timeline(
   }
 
   const laneWidth = 11;
-  const lanes = axisX + 10 + spans.length * laneWidth;
+  const lanes = axisX + 10 + rows.length * laneWidth;
 
-  spans.forEach((span, i) => {
+  rows.forEach((row, i) => {
+    const x = axisX + 10 + i * laneWidth;
+
+    if (row.kind === 'gap') {
+      const top = at(row.from);
+      const bottom = at(row.to);
+      // El mismo carril que tendría su barra: ticks en las fechas, trazo
+      // discontinuo entre ellas y el rótulo donde lo llevan las etapas.
+      paths.push({ d: line(x, top, x + 8, top, 17 + i), kind: 'axis' });
+      paths.push({ d: line(x, bottom, x + 8, bottom, 19 + i), kind: 'axis' });
+      paths.push({ d: `M${n(x + 4)} ${n(top + 3)} V${n(bottom - 3)}`, kind: 'gap' });
+      texts.push({
+        x: lanes + 8,
+        y: n((top + bottom) / 2 + 4),
+        text: gapLabel!,
+        kind: 'label',
+        anchor: 'start',
+      });
+      return;
+    }
+
+    const span = row.span;
     const top = at(span.from);
     const bottom = at(span.to);
-    const x = axisX + 10 + i * laneWidth;
     const height = Math.max(bottom - top, 10);
     paths.push({ d: box(x, top, 8, height, 11 + i * 5), kind: 'bar' });
     if (span.open) paths.push(tip(x + 4, bottom + 9, 'down'));
