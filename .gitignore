@@ -46,3 +46,6 @@ Thumbs.db
 # Vercel
 .vercel
 .env*
+
+# Capturas del check de viewport
+.viewport-shots
