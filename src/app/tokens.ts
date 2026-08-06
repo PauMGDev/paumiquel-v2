@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { Component } from '@angular/core';
 
 import { copy } from './content';
+import { applySeo } from './seo';
 
 @Component({
   selector: 'app-tokens',
@@ -13,8 +13,12 @@ export class Tokens {
 
   constructor() {
     // Guía viva, no contenido del sitio: se prerenderiza pero no se indexa
-    // ni entra en el sitemap (1.3).
-    inject(Title).setTitle('Tokens — paumiquel.com');
-    inject(Meta).addTag({ name: 'robots', content: 'noindex, nofollow' });
+    // ni entra en el sitemap.
+    applySeo({
+      path: 'tokens',
+      title: copy.tokens.seo.title,
+      description: copy.tokens.seo.description,
+      noindex: true,
+    });
   }
 }

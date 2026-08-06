@@ -5,9 +5,20 @@
 export const copy = {
   home: {
     marker: 'Fig. 00 — scaffold prerenderizado',
+    seo: {
+      title: 'Pau Miquel — Full stack TypeScript con IA aplicada',
+      description:
+        'Desarrollador full stack en TypeScript con capa de IA aplicada en producción. Angular, Node y Postgres, de la base de datos a la interfaz.',
+      imageAlt: 'Pau Miquel — full stack TypeScript con IA aplicada',
+    },
   },
 
   tokens: {
+    seo: {
+      title: 'Tokens — paumiquel.com',
+      description:
+        'Guía viva del sistema de diseño de paumiquel.com: papel, tinta, tipografía y marginalia con sus ratios de contraste medidos.',
+    },
     eyebrow: 'Sistema de diseño',
     title: 'Tokens',
     lead: 'Cuaderno de ingeniería, voz editorial. Esta página existe para decidir sobre ella: papel, tinta, tipografía y marginalia puestos a tamaño real, con sus ratios medidos.',
