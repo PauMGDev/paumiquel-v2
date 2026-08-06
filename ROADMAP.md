@@ -355,3 +355,24 @@ queda o la señal que hay que vigilar.
   a hacer falta reconstruir un estado intermedio para poder commitear, el paso
   estaba mal troceado desde el plan.
 
+
+### F3 — Revisión de diseño
+
+- 2026-08-06 (F3): tres bugs del índice lateral con una sola causa. Aparecía
+  tarde (esperaba a que el hero se fuera entero de pantalla, y para entonces
+  Stack llevaba media pantalla dentro), Contacto no se resaltaba nunca (es la
+  sección más corta y su borde superior jamás llegaba a la banda de
+  activación) y una recarga a media página dejaba el índice ausente. Los tres
+  salían de lo mismo: el estado se iba construyendo a base de eventos
+  —`isIntersecting` de cada callback, sección a sección— en vez de derivarse de
+  dónde está la página ahora. Se invierte: el observador y el scroll solo
+  disparan un recálculo, y el estado sale siempre de la geometría del momento
+  (`getBoundingClientRect` de cada sección, `intersectionRatio` del hero,
+  `scrollY + innerHeight` contra la altura del documento). El fondo de página
+  necesita además su regla explícita, porque ahí no se cruza ninguna frontera
+  y no hay callback que valga. Regla que queda: los estados de UI derivados de
+  eventos tienen agujeros justo donde el evento no ocurre; derivar siempre del
+  estado actual. Es la misma regla que la verdad-es-HEAD del hook de commits,
+  en versión frontend: no acumules lo que puedes volver a leer. Señal a
+  vigilar: cualquier estado nuevo que se escriba dentro de un callback en vez
+  de calcularse en una función que se pueda llamar en cualquier momento.
