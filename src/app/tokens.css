@@ -3,21 +3,10 @@
   padding-inline: var(--page-gutter);
 }
 
+/* .sheet y su línea de margen viven en src/styles.css: los comparte con la
+   home. Aquí solo el respiro propio de la guía. */
 .sheet {
-  position: relative;
-  max-width: var(--page-max);
-  margin-inline: auto;
   padding-block: var(--space-12) var(--space-24);
-}
-
-/* Línea de margen del cuaderno: recorre la hoja entera, no cada bloque. */
-.sheet::before {
-  content: '';
-  position: absolute;
-  inset-block: 0;
-  left: 0;
-  width: var(--rule-width);
-  background: var(--color-rule-strong);
 }
 
 .head,
@@ -229,30 +218,6 @@ figcaption {
   font-size: var(--text-xs);
   line-height: var(--leading-snug);
   color: var(--color-ink-soft);
-}
-
-/* --- 04 Sello --- */
-
-.seal-stamp {
-  /* Ítem de grid: sin esto se estira a toda la columna y deja de ser sello. */
-  justify-self: start;
-  margin: 0;
-  padding: var(--space-2) var(--space-4);
-  border: 2px solid var(--color-seal);
-  border-radius: var(--radius);
-  color: var(--color-seal);
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  rotate: -2deg;
-}
-
-.seal-stamp-meta {
-  display: block;
-  font-size: var(--text-2xs);
-  letter-spacing: 0;
-  text-transform: none;
 }
 
 @media (min-width: 40rem) {
