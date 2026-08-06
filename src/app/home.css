@@ -57,6 +57,43 @@
   margin: 0 0 var(--space-8);
 }
 
+/* En desktop la entradilla se va al margen derecho como nota: es el mismo
+   tratamiento que la guía de /tokens, y es lo que llena la mitad de la hoja
+   que antes estaba vacía. En móvil no hay margen, así que se queda arriba
+   como prosa normal. */
+@media (min-width: 64rem) {
+  .section {
+    display: grid;
+    grid-template-columns: minmax(0, var(--measure)) minmax(0, 18rem);
+    column-gap: var(--space-12);
+    align-items: start;
+  }
+
+  /* El selector de hijo pesa más que el de clase: las excepciones se
+     escriben también como hijo o no ganan. */
+  .section > * {
+    grid-column: 1;
+  }
+
+  /* Las entradas traen su propia columna de margen (empresa, periodo) y el
+     bento se lee a lo ancho: los dos cruzan la hoja entera. */
+  .section > .entry,
+  .section > .bento {
+    grid-column: 1 / -1;
+  }
+
+  .section > .section-lead {
+    grid-column: 2;
+    grid-row: 1;
+    max-width: none;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    line-height: var(--leading-snug);
+    color: var(--color-ink-soft);
+  }
+}
+
 .groups {
   display: grid;
   gap: var(--space-1) var(--space-6);
