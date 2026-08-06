@@ -78,7 +78,9 @@ for (const [width, height, name] of VIEWPORTS) {
       })
       .map((el) => el.className || el.tagName);
     return {
-      firstBottom: first ? first.getBoundingClientRect().bottom : 0,
+      // Sin sección de entrada no hay nada que medir: eso es un fallo, no un
+      // aprobado. Un check que pasa con la página vacía no comprueba nada.
+      firstBottom: first ? first.getBoundingClientRect().bottom : Infinity,
       scrollWidth: document.documentElement.scrollWidth,
       overflowing: [...new Set(overflowing)],
     };
@@ -89,7 +91,9 @@ for (const [width, height, name] of VIEWPORTS) {
   if (cut || wide) failed++;
 
   const detail = [
-    `entrada acaba en ${Math.round(result.firstBottom)}px de ${height}`,
+    Number.isFinite(result.firstBottom)
+      ? `entrada acaba en ${Math.round(result.firstBottom)}px de ${height}`
+      : 'NO HAY <main> CON CONTENIDO: ¿build fallido?',
     wide ? `DESBORDA: ${result.overflowing.join(', ') || `${result.scrollWidth}px de ancho`}` : '',
   ]
     .filter(Boolean)
