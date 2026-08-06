@@ -10,6 +10,10 @@ import { SITE_URL, applySeo } from './seo';
 })
 export class Home {
   protected readonly hero = copy.home.hero;
+  protected readonly stack = copy.home.stack;
+  protected readonly experience = copy.home.experience;
+  protected readonly education = copy.home.education;
+  protected readonly certification = copy.home.certification;
 
   constructor() {
     applySeo({

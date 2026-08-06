@@ -14,4 +14,55 @@
       <span>{{ hero.availability.detail }}</span>
     </p>
   </section>
+
+  <section class="section" id="stack">
+    <h2 class="section-head"><span class="num">{{ stack.number }}</span> {{ stack.title }}</h2>
+    <p class="section-lead">{{ stack.lead }}</p>
+    <dl class="groups">
+      @for (group of stack.groups; track group.label) {
+        <dt class="meta-line">{{ group.label }}</dt>
+        <dd>{{ group.items.join(' · ') }}</dd>
+      }
+    </dl>
+  </section>
+
+  <section class="section" id="experiencia">
+    <h2 class="section-head"><span class="num">{{ experience.number }}</span> {{ experience.title }}</h2>
+    <p class="section-lead">{{ experience.lead }}</p>
+    @for (job of experience.jobs; track job.company + job.period) {
+      <article class="entry">
+        <h3 class="entry-title">{{ job.role }}</h3>
+        <p class="meta-line">{{ job.company }}<span>{{ job.period }}</span></p>
+        <ul class="entry-lines">
+          @for (line of job.lines; track line) {
+            <li>{{ line }}</li>
+          }
+        </ul>
+      </article>
+    }
+  </section>
+
+  <section class="section" id="formacion">
+    <h2 class="section-head"><span class="num">{{ education.number }}</span> {{ education.title }}</h2>
+    @for (item of education.items; track item.name) {
+      <article class="entry">
+        <h3 class="entry-title">{{ item.name }}</h3>
+        <p class="meta-line">{{ item.school }}<span>{{ item.period }}</span></p>
+        <p class="entry-detail">{{ item.detail }}</p>
+      </article>
+    }
+  </section>
+
+  <section class="section" id="certificacion">
+    <h2 class="section-head"><span class="num">{{ certification.number }}</span> {{ certification.title }}</h2>
+    <article class="entry">
+      <h3 class="entry-title">{{ certification.name }}</h3>
+      <p class="meta-line">{{ certification.issuer }}</p>
+      <p class="entry-detail">
+        <a [href]="certification.verify.href" rel="noopener" target="_blank">
+          {{ certification.verify.label }}
+        </a>
+      </p>
+    </article>
+  </section>
 </main>

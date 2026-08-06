@@ -17,6 +17,84 @@ export const copy = {
       ],
       availability: { state: 'disponible', detail: 'agosto 2026' },
     },
+    stack: {
+      number: '01',
+      title: 'Stack',
+      lead: 'Un ecosistema TypeScript de punta a punta: Angular con componentes standalone en el frontend, NestJS en el backend, Prisma y PostgreSQL como capa de datos, strict mode en los dos lados y cobertura con Vitest.',
+      groups: [
+        { label: 'Frontend', items: ['Angular', 'TypeScript', 'Tailwind CSS'] },
+        { label: 'Backend', items: ['NestJS', 'Node.js', 'Prisma', 'PostgreSQL'] },
+        { label: 'IA aplicada', items: ['Claude API', 'MCP', 'Claude Code'] },
+        { label: 'Calidad', items: ['Vitest', 'TDD', 'Strict mode'] },
+      ],
+    },
+
+    experience: {
+      number: '02',
+      title: 'Experiencia',
+      lead: 'La capa de IA la construyo con workflows agénticos: Claude Code con contexto por capas, servidores MCP propios y subagentes especializados. La base sigue siendo la de siempre — arquitectura, testing y código que otro pueda mantener.',
+      jobs: [
+        {
+          role: 'Ingeniero de software — Automatización con IA',
+          company: 'Robles Sphère',
+          period: 'jul 2026 → actualidad',
+          lines: [
+            'Clasificador automático del correo entrante con la API de Claude, integrado en el flujo administrativo.',
+            'Pre-análisis técnico para la renovación del ERP: extracción y estructuración de requisitos con IA.',
+            'Auditoría técnica y SEO de los activos web de la empresa.',
+          ],
+        },
+        {
+          role: 'Ingeniero de software',
+          company: 'EFI Cretaprint Development',
+          period: 'dic 2021 → may 2024',
+          lines: [
+            'Dashboard para empresas con Blazor.',
+            'Mantenimiento y creación de bases de datos en SQL Server.',
+            'Backend con ASP.NET.',
+            'Desarrollo dirigido por tests.',
+          ],
+        },
+        {
+          role: 'Contrato de prácticas',
+          company: 'EFI Cretaprint Development',
+          period: 'ago 2021 → dic 2021',
+          lines: [
+            'Nueva interfaz para el software interno.',
+            'Web de pruebas para la conexión entre dispositivos.',
+            'Documentación del proyecto y trabajo peer-to-peer.',
+          ],
+        },
+      ],
+    },
+
+    education: {
+      number: '03',
+      title: 'Formación',
+      items: [
+        {
+          name: 'Máster en Desarrollo Fullstack',
+          school: 'UNIR',
+          period: 'nov 2025 → jul 2026',
+          detail: 'Angular, Node.js, Express, MongoDB y PostgreSQL. Arquitectura limpia, SOLID y patrones. Metodologías ágiles y desarrollo orientado a tests.',
+        },
+        {
+          name: 'Grado en Diseño y Desarrollo de Videojuegos',
+          school: 'Universidad Jaume I',
+          period: '4 cursos, sin titular',
+          detail: 'Unity 2D y 3D con C#, arte y modelado 3D. De ahí viene la costumbre de perseguir los milisegundos.',
+        },
+      ],
+    },
+
+    certification: {
+      number: '04',
+      title: 'Certificación',
+      name: 'Claude Code in Action',
+      issuer: 'Anthropic',
+      verify: { label: 'Verificar', href: 'https://verify.skilljar.com/c/7nzxnt37mbfi' },
+    },
+
     seo: {
       title: 'Pau Miquel — Full stack TypeScript con IA aplicada',
       description:

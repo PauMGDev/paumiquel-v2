@@ -50,6 +50,61 @@
   font-size: var(--text-sm);
 }
 
+/* --- Secciones ----------------------------------------------------------- */
+
+.section-lead {
+  max-width: var(--measure);
+  margin: 0 0 var(--space-8);
+}
+
+.groups {
+  display: grid;
+  gap: var(--space-1) var(--space-6);
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.groups dd {
+  margin: 0 0 var(--space-4);
+}
+
+.entry {
+  padding-top: var(--space-8);
+  max-width: var(--measure);
+}
+
+.entry + .entry {
+  border-top: var(--rule-width) solid var(--color-rule);
+}
+
+.entry-title {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-1);
+}
+
+.entry-lines,
+.entry-detail {
+  margin: var(--space-4) 0 0;
+}
+
+.entry-lines {
+  padding-left: var(--space-4);
+  list-style: none;
+}
+
+/* La raya de guion es el lenguaje de la v1: cada línea es un resultado. */
+.entry-lines li {
+  position: relative;
+  margin-bottom: var(--space-2);
+}
+
+.entry-lines li::before {
+  content: '—';
+  position: absolute;
+  left: calc(-1 * var(--space-4));
+  color: var(--color-ink-soft);
+}
+
 @media (min-width: 64rem) {
   /* El sello sube al margen derecho, que es donde vive la anotación. */
   .hero {
@@ -66,5 +121,32 @@
     grid-column: 2;
     grid-row: 1 / span 3;
     align-self: start;
+  }
+
+  /* Empresa y periodo salen al margen, alineados con el puesto que anotan. */
+  .entry {
+    display: grid;
+    grid-template-columns: minmax(0, var(--measure)) minmax(0, 18rem);
+    column-gap: var(--space-12);
+    max-width: none;
+  }
+
+  .entry > * {
+    grid-column: 1;
+  }
+
+  .entry > .meta-line {
+    grid-column: 2;
+    grid-row: 1;
+    padding-top: 0.4em;
+  }
+
+  .groups {
+    grid-template-columns: 8rem minmax(0, 1fr);
+    max-width: none;
+  }
+
+  .groups dt {
+    padding-top: 0.3em;
   }
 }
