@@ -282,7 +282,10 @@ queda o la señal que hay que vigilar.
   recurso que el consumidor descarga en el momento de compartir, y tiene que
   resolver desde el día uno. Arreglo pendiente (dueño: 5.3 o antes): subir
   og/home.png al proyecto de la v1 —también en Vercel— para que la URL
-  definitiva sirva el PNG ya, sin tocar el cutover. Tras el arreglo, los
+  definitiva sirva el PNG ya, sin tocar el cutover. ARREGLADO 2026-08-07: el
+  PNG vive ya en `public/og/home.png` del repo CVOnline (commit 41f384b), y
+  la URL definitiva responde 200 image/png, 47.907 bytes, verificado con
+  fetch contra el dominio. Tras el arreglo, los
   scrapers cachean el fallo: purgar con Facebook Sharing Debugger ("Scrape
   Again"), LinkedIn Post Inspector y @WebpageBot de Telegram; WhatsApp cachea
   en el cliente hasta ~30 días y no se puede forzar. Regla que queda: los
